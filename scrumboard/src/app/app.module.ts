@@ -44,7 +44,7 @@ import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {FlexLayoutModule} from "@angular/flex-layout";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import { NavComponent } from './components/nav/nav.component';
+import { HomeComponent } from './components/home/home.component';
 
 const materialModules = [
   CdkTreeModule,
@@ -86,7 +86,7 @@ const materialModules = [
     AppComponent,
     SignInComponent,
     SignUpComponent,
-    NavComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule,
