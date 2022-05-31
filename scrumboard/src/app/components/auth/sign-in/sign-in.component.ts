@@ -22,13 +22,13 @@ export class SignInComponent implements OnInit {
     this.form = this.formBuilder.group(
       {
         email: ['', [Validators.required, Validators.email]],
-        password: ['', Validators.required,]
+        password: ['', Validators.required]
       });
   }
 
   onSubmitForm() {
     let email = this.form.get("email")?.value;
-    let password = this.form.get("confirmPassword")?.value;
+    let password = this.form.get("password")?.value;
 
     this.authService.login(email, password)
       .then(() => this.router.navigate(['/']))
