@@ -20,4 +20,8 @@ export class AuthService {
   public logout() {
     return signOut(this.auth);
   }
+
+  public getUser() {
+    return this.auth.currentUser;
+  }
 }
