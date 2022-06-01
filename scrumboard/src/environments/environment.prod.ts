@@ -1,11 +1,11 @@
 export const environment = {
   firebase: {
-    projectId: 'scrumboard-epic',
-    appId: '1:544864155965:web:c90a6094a882fcb2a12d54',
-    storageBucket: 'scrumboard-epic.appspot.com',
-    apiKey: 'AIzaSyBN7-rzr1k8SwPWTwJjRwFK1k9VG20gQy0',
-    authDomain: 'scrumboard-epic.firebaseapp.com',
-    messagingSenderId: '544864155965',
+    projectId: 'her-scrumboard',
+    appId: '1:628968192272:web:200bc9b3345b3ca95b0d95',
+    storageBucket: 'her-scrumboard.appspot.com',
+    apiKey: 'AIzaSyAJjf7ckjiB6ue69rsCvPRS-nO-L9W-Ugc',
+    authDomain: 'her-scrumboard.firebaseapp.com',
+    messagingSenderId: '628968192272',
   },
   production: true
 };
