@@ -12,9 +12,9 @@
           <mat-error *ngIf="form.get('email')?.hasError('email')">E-mail is invalid</mat-error>
         </mat-form-field>
         <mat-form-field class="form-field">
-          <input matInput formControlName="fullName" type="text">
+          <input matInput formControlName="name" type="text">
           <mat-placeholder class="placeholder">Full name</mat-placeholder>
-          <mat-error *ngIf="form.get('fullName')?.hasError('required')">Full name is required</mat-error>
+          <mat-error *ngIf="form.get('name')?.hasError('required')">Name is required</mat-error>
         </mat-form-field>
         <mat-form-field class="form-field">
           <input matInput formControlName="password" type="password">
