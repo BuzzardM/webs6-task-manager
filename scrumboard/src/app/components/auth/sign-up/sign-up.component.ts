@@ -3,6 +3,8 @@ import {AuthService} from "../../../services/auth.service";
 import {Router} from "@angular/router";
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import Validation from "../../../utils/form-validation";
+import {UserService} from "../../../services/user/user.service";
+import {IUser} from "../../../models/user";
 
 @Component({
   selector: 'app-sign-up',
@@ -12,20 +14,21 @@ import Validation from "../../../utils/form-validation";
 export class SignUpComponent implements OnInit {
   form: FormGroup = new FormGroup({
     email: new FormControl(''),
-    fullName: new FormControl(''),
+    name: new FormControl(''),
     password: new FormControl(''),
     confirmPassword: new FormControl(''),
   });
 
   constructor(private readonly authService: AuthService,
               private readonly router: Router,
-              private formBuilder: FormBuilder) {
+              private formBuilder: FormBuilder,
+              private userService: UserService) {
   }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group(
       {
-        fullName: ['', Validators.required],
+        name: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
         password: ['', [
           Validators.required,
@@ -41,11 +44,16 @@ export class SignUpComponent implements OnInit {
   }
 
   onSubmitForm() {
-    let email = this.form.get("email")?.value;
-    let password = this.form.get("confirmPassword")?.value;
+    let email = this.form.get('email')?.value;
+    let name = this.form.get('name')?.value;
+    let password = this.form.get('confirmPassword')?.value;
 
     this.authService.register(email, password)
-      .then(() => this.router.navigate(['/']))
+      .then(async () => {
+        const user: IUser = {email, name};
+        await this.userService.addUser(user);
+        await this.router.navigate(['/']);
+      })
       .catch((e) => console.log(e.message));
   }
 }

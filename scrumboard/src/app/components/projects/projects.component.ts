@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {UserService} from "../../services/user/user.service";
+import {IUser} from "../../models/user";
+import {Observable} from "rxjs";
 
 @Component({
   selector: 'app-projects',
@@ -6,10 +9,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./projects.component.sass']
 })
 export class ProjectsComponent implements OnInit {
+  user: IUser | undefined;
 
-  constructor() { }
-
-  ngOnInit(): void {
+  constructor(private userService: UserService) {
   }
 
+  ngOnInit(): void {
+    this.userService.getUser('test@test.nl').subscribe((res: IUser) => {
+      this.user = res;
+    });
+  }
 }
