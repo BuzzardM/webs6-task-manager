@@ -46,8 +46,6 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HomeComponent} from './components/home/home.component';
 import {ProjectsComponent} from './components/projects/projects.component';
-import {AngularFireAuthGuard, AngularFireAuthGuardModule} from "@angular/fire/compat/auth-guard";
-import { ProjectComponent } from './project/project.component';
 
 const materialModules = [
   CdkTreeModule,
@@ -91,7 +89,6 @@ const materialModules = [
     SignUpComponent,
     HomeComponent,
     ProjectsComponent,
-    ProjectComponent
   ],
   imports: [
     BrowserModule,
