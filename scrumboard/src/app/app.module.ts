@@ -46,6 +46,9 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HomeComponent} from './components/home/home.component';
 import {ProjectsComponent} from './components/projects/projects.component';
+import { AddProjectDialogComponent } from './components/projects/add-project-dialog/add-project-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import { AddMemberDialogComponent } from './components/projects/add-member-dialog/add-member-dialog.component';
 
 const materialModules = [
   CdkTreeModule,
@@ -89,6 +92,8 @@ const materialModules = [
     SignUpComponent,
     HomeComponent,
     ProjectsComponent,
+    AddProjectDialogComponent,
+    AddMemberDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -100,7 +105,8 @@ const materialModules = [
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    materialModules
+    materialModules,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -15,12 +15,39 @@
       <mat-cell *matCellDef="let project"> {{ project.status }}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="member_info">
+    <ng-container matColumnDef="role">
       <mat-header-cell *matHeaderCellDef>Role</mat-header-cell>
       <mat-cell *matCellDef="let project"> {{ getProjectRole(project.member_info) }}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="detail" >
+      <mat-header-cell *matHeaderCellDef>Detail</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button routerLink="/projects/{{ row?.uid }}" mat-mini-fab color="primary" matTooltip="Open project page">
+          <mat-icon>open_in_new</mat-icon>
+        </button>
+        <button (click)="addMemberModal(row)" class="margin-left-right" mat-mini-fab color="primary" matTooltip="Invite user">
+          <mat-icon>person_add</mat-icon>
+        </button>
+<!--        <button (click)="editModal(row)" class="margin-left-right" mat-mini-fab color="edit" matTooltip="Edit project">-->
+<!--          <mat-icon>edit</mat-icon>-->
+<!--        </button>-->
+<!--        <button (click)="archiveModal(row)" class="margin-right" mat-mini-fab color="primary" matTooltip="Archive project">-->
+<!--          <mat-icon>archive</mat-icon>-->
+<!--        </button>-->
+<!--        <button (click)="deleteModal(row)" mat-mini-fab color="delete" matTooltip="Delete project">-->
+<!--          <mat-icon>delete</mat-icon>-->
+<!--        </button>-->
+      </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
+
+  <mat-paginator #paginator
+                 [pageSize]="10"
+                 [pageSizeOptions]="[5, 10, 20]"
+                 [showFirstLastButtons]="true">
+  </mat-paginator>
 </div>

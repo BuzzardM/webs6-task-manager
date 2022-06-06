@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {UserService} from "../../services/user/user.service";
 import {IUser} from "../../models/user";
 import {Observable} from "rxjs";
@@ -7,6 +7,7 @@ import {AuthService} from "../../services/auth.service";
 import {IProject} from "../../models/project";
 import {MatTableDataSource} from "@angular/material/table";
 import {IProjectMember} from "../../models/projectMember";
+import {MatPaginator} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-projects',
@@ -19,8 +20,9 @@ export class ProjectsComponent implements OnInit {
   userEmail: string | null | undefined;
 
   //table variables
-  displayedColumns = ['title', 'description', 'status', 'member_info'];
+  displayedColumns = ['title', 'description', 'status', 'role', 'detail'];
   dataSource = new MatTableDataSource<IProject>();
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private authService: AuthService, private userService: UserService, private projectService: ProjectService) {
   }
@@ -35,8 +37,12 @@ export class ProjectsComponent implements OnInit {
     }
   }
 
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
   getProjectRole(members: [IProjectMember]): string {
-     let member = members.find(i => i.user_id == this.userEmail);
-     return member !== undefined ? member.role : 'No role';
+    let member = members.find(i => i.user_id == this.userEmail);
+    return member !== undefined ? member.role : 'No role';
   }
 }
