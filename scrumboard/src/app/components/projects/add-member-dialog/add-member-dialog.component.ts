@@ -1,8 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {UserService} from "../../../services/user/user.service";
 import {UserRole} from "../../../enums/roles";
+import {IProject} from "../../../models/project";
 
 @Component({
   selector: 'app-add-member-dialog',
@@ -12,8 +13,11 @@ import {UserRole} from "../../../enums/roles";
 export class AddMemberDialogComponent {
   addMemberForm: FormGroup;
   userRoles = UserRole;
+  usersInProject: string[];
 
-  constructor(public dialogRef: MatDialogRef<AddMemberDialogComponent>, private formBuilder: FormBuilder, private userService: UserService) {
+  constructor(public dialogRef: MatDialogRef<AddMemberDialogComponent>, @Inject(MAT_DIALOG_DATA) public data: string[], private formBuilder: FormBuilder, private userService: UserService) {
+    this.usersInProject = data;
+
     this.addMemberForm = this.formBuilder.group({
       email: '',
       name: '',
@@ -22,6 +26,11 @@ export class AddMemberDialogComponent {
   }
 
   async checkUser(event: any): Promise<void> {
+    if(this.usersInProject.includes(event.target.value)) {
+      this.addMemberForm.controls['email'].setErrors({'duplicateUser': true});
+      return;
+    }
+
     if (await this.userService.userExists(event.target.value))
       this.addMemberForm.controls['email'].setErrors(null);
     else

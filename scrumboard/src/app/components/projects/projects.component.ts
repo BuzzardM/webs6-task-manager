@@ -12,6 +12,7 @@ import {AddMemberDialogComponent} from "./add-member-dialog/add-member-dialog.co
 import {AddProjectDialogComponent} from "./add-project-dialog/add-project-dialog.component";
 import {ProjectStatus} from "../../enums/projectStatus";
 import {UserRole} from "../../enums/roles";
+import {EditProjectDialogComponent} from "./edit-project-dialog/edit-project-dialog.component";
 
 @Component({
   selector: 'app-projects',
@@ -51,6 +52,23 @@ export class ProjectsComponent implements OnInit {
     return member !== undefined ? member.role : 'No role';
   }
 
+  editProjectModal(project: IProject): void {
+    const dialogRef = this.dialog.open(EditProjectDialogComponent, {
+      width: '60%',
+      data: project
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        project.title = result.value.title;
+        project.description = result.value.description;
+        project.status = result.value.status;
+
+        this.projectService.updateProject(project);
+      }
+    })
+  }
+
   addProjectModal() {
     const dialogRef = this.dialog.open(AddProjectDialogComponent, {
       width: '60%'
@@ -78,10 +96,10 @@ export class ProjectsComponent implements OnInit {
 
   addMemberModal(project: IProject) {
     const dialogRef = this.dialog.open(AddMemberDialogComponent, {
-      width: '60%'
+      width: '60%',
+      data: project.members
     });
 
-    //TODO: check if user is in project
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         // @ts-ignore

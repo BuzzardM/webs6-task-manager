@@ -9,6 +9,9 @@
           <mat-error *ngIf="addMemberForm.controls['email'].errors?.['notFound']">
             User not found
           </mat-error>
+          <mat-error *ngIf="addMemberForm.controls['email'].errors?.['duplicateUser']">
+            User is already in project
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="outline">

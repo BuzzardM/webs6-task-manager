@@ -39,9 +39,9 @@
         <button (click)="addMemberModal(row)" class="margin-left-right" mat-mini-fab color="primary" matTooltip="Invite user">
           <mat-icon>person_add</mat-icon>
         </button>
-<!--        <button (click)="editModal(row)" class="margin-left-right" mat-mini-fab color="edit" matTooltip="Edit project">-->
-<!--          <mat-icon>edit</mat-icon>-->
-<!--        </button>-->
+        <button *ngIf="getProjectRole(row.member_info) == userRole.owner" (click)="editProjectModal(row)" class="margin-left-right" mat-mini-fab color="edit" matTooltip="Edit project">
+          <mat-icon>edit</mat-icon>
+        </button>
 <!--        <button (click)="archiveModal(row)" class="margin-right" mat-mini-fab color="primary" matTooltip="Archive project">-->
 <!--          <mat-icon>archive</mat-icon>-->
 <!--        </button>-->
