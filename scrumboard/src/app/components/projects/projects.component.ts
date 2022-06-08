@@ -8,6 +8,8 @@ import {IProject} from "../../models/project";
 import {MatTableDataSource} from "@angular/material/table";
 import {IProjectMember} from "../../models/projectMember";
 import {MatPaginator} from "@angular/material/paginator";
+import {MatDialog} from "@angular/material/dialog";
+import {AddMemberDialogComponent} from "./add-member-dialog/add-member-dialog.component";
 
 @Component({
   selector: 'app-projects',
@@ -24,7 +26,7 @@ export class ProjectsComponent implements OnInit {
   dataSource = new MatTableDataSource<IProject>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private authService: AuthService, private userService: UserService, private projectService: ProjectService) {
+  constructor(private authService: AuthService, private userService: UserService, private projectService: ProjectService, private dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -42,7 +44,23 @@ export class ProjectsComponent implements OnInit {
   }
 
   getProjectRole(members: [IProjectMember]): string {
-    let member = members.find(i => i.user_id == this.userEmail);
+    let member = members.find(i => i.email == this.userEmail);
     return member !== undefined ? member.role : 'No role';
+  }
+
+  addMemberModal(project: IProject) {
+    const dialogRef = this.dialog.open(AddMemberDialogComponent, {
+      width: '60%'
+    })
+
+    //TODO: check if user is in project
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        // @ts-ignore
+        project.members.push(result.value.email);
+        project.member_info.push(result.value);
+        this.projectService.updateProject(project);
+      }
+    })
   }
 }
