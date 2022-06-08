@@ -1,6 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {UserService} from "../../services/user/user.service";
-import {IUser} from "../../models/user";
 import {Observable} from "rxjs";
 import {ProjectService} from "../../services/project/project.service";
 import {AuthService} from "../../services/auth.service";
@@ -10,6 +9,9 @@ import {IProjectMember} from "../../models/projectMember";
 import {MatPaginator} from "@angular/material/paginator";
 import {MatDialog} from "@angular/material/dialog";
 import {AddMemberDialogComponent} from "./add-member-dialog/add-member-dialog.component";
+import {AddProjectDialogComponent} from "./add-project-dialog/add-project-dialog.component";
+import {ProjectStatus} from "../../enums/projectStatus";
+import {UserRole} from "../../enums/roles";
 
 @Component({
   selector: 'app-projects',
@@ -17,9 +19,10 @@ import {AddMemberDialogComponent} from "./add-member-dialog/add-member-dialog.co
   styleUrls: ['./projects.component.sass']
 })
 export class ProjectsComponent implements OnInit {
-  currentUser: Observable<IUser> | undefined;
   projects: Observable<IProject[]> | undefined;
   userEmail: string | null | undefined;
+  projectStatus = ProjectStatus;
+  userRole = UserRole;
 
   //table variables
   displayedColumns = ['title', 'description', 'status', 'role', 'detail'];
@@ -48,10 +51,35 @@ export class ProjectsComponent implements OnInit {
     return member !== undefined ? member.role : 'No role';
   }
 
+  addProjectModal() {
+    const dialogRef = this.dialog.open(AddProjectDialogComponent, {
+      width: '60%'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        const memberInfo = {
+          name: result.value.username,
+          role: this.userRole.owner,
+          email: this.userEmail
+        }
+
+        result.value.status = this.projectStatus.open;
+        result.value.members = [this.userEmail];
+        result.value.member_info = [memberInfo];
+
+        delete result.value.username;
+        const project = result.value as IProject;
+
+        this.projectService.addProject(project);
+      }
+    })
+  }
+
   addMemberModal(project: IProject) {
     const dialogRef = this.dialog.open(AddMemberDialogComponent, {
       width: '60%'
-    })
+    });
 
     //TODO: check if user is in project
     dialogRef.afterClosed().subscribe(result => {

@@ -1,4 +1,14 @@
-<div>
+<div class="mat-elevation-z8 margin-left-right min-width-rem">
+
+  <div class="margin-all">
+    <button mat-mini-fab class="top-button margin-right" routerLink="/archived-projects" color="primary" matTooltip="Archived projects">
+      <mat-icon>inventory</mat-icon>
+    </button>
+    <button mat-mini-fab class="top-button" (click)="addProjectModal()" color="primary" matTooltip="Add project">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
   <mat-table [dataSource]="dataSource">
     <ng-container matColumnDef="title">
       <mat-header-cell *matHeaderCellDef>Title</mat-header-cell>
@@ -20,7 +30,7 @@
       <mat-cell *matCellDef="let project"> {{ getProjectRole(project.member_info) }}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="detail" >
+    <ng-container matColumnDef="detail">
       <mat-header-cell *matHeaderCellDef>Detail</mat-header-cell>
       <mat-cell *matCellDef="let row">
         <button routerLink="/projects/{{ row?.uid }}" mat-mini-fab color="primary" matTooltip="Open project page">

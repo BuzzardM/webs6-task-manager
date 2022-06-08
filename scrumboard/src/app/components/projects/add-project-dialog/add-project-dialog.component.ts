@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {MatDialogRef} from "@angular/material/dialog";
 
@@ -12,8 +12,9 @@ export class AddProjectDialogComponent {
 
   constructor(public dialogRef: MatDialogRef<AddProjectDialogComponent>, private formBuilder: FormBuilder) {
     this.addProjectForm = this.formBuilder.group({
-      name: '',
-      description: ''
+      title: '',
+      description: '',
+      username: ''
     })
   }
 
