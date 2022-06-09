@@ -50,6 +50,7 @@ import { AddProjectDialogComponent } from './components/projects/add-project-dia
 import {MatDialogModule} from "@angular/material/dialog";
 import { AddMemberDialogComponent } from './components/projects/add-member-dialog/add-member-dialog.component';
 import { EditProjectDialogComponent } from './components/projects/edit-project-dialog/edit-project-dialog.component';
+import { EditProjectMembersDialogComponent } from './components/projects/edit-project-members-dialog/edit-project-members-dialog.component';
 
 const materialModules = [
   CdkTreeModule,
@@ -96,6 +97,7 @@ const materialModules = [
     AddProjectDialogComponent,
     AddMemberDialogComponent,
     EditProjectDialogComponent,
+    EditProjectMembersDialogComponent,
   ],
   imports: [
     BrowserModule,

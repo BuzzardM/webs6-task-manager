@@ -25,9 +25,9 @@
       <mat-cell *matCellDef="let project"> {{ project.status }}</mat-cell>
     </ng-container>
 
-    <ng-container matColumnDef="role">
-      <mat-header-cell *matHeaderCellDef>Role</mat-header-cell>
-      <mat-cell *matCellDef="let project"> {{ getProjectRole(project.member_info) }}</mat-cell>
+    <ng-container matColumnDef="owner">
+      <mat-header-cell *matHeaderCellDef>Owner</mat-header-cell>
+      <mat-cell *matCellDef="let project"> {{ getProjectOwner(project.member_info) }}</mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="detail">
@@ -36,11 +36,14 @@
         <button routerLink="/projects/{{ row?.uid }}" mat-mini-fab color="primary" matTooltip="Open project page">
           <mat-icon>open_in_new</mat-icon>
         </button>
-        <button (click)="addMemberModal(row)" class="margin-left-right" mat-mini-fab color="primary" matTooltip="Invite user">
+        <button *ngIf="getProjectRole(row.member_info) == userRole.admin || getProjectRole(row.member_info) == userRole.owner" (click)="addMemberModal(row)" class="margin-left-right" mat-mini-fab color="primary" matTooltip="Invite user">
           <mat-icon>person_add</mat-icon>
         </button>
-        <button *ngIf="getProjectRole(row.member_info) == userRole.owner" (click)="editProjectModal(row)" class="margin-left-right" mat-mini-fab color="edit" matTooltip="Edit project">
+        <button *ngIf="getProjectRole(row.member_info) == userRole.owner" (click)="editProjectModal(row)" class="margin-left" mat-mini-fab color="edit" matTooltip="Edit project">
           <mat-icon>edit</mat-icon>
+        </button>
+        <button *ngIf="getProjectRole(row.member_info) == userRole.owner" (click)="editProjectMembersModal(row)" class="margin-left-right" mat-mini-fab color="edit" matTooltip="Edit project members">
+          <mat-icon>people</mat-icon>
         </button>
 <!--        <button (click)="archiveModal(row)" class="margin-right" mat-mini-fab color="primary" matTooltip="Archive project">-->
 <!--          <mat-icon>archive</mat-icon>-->

@@ -13,6 +13,7 @@ import {AddProjectDialogComponent} from "./add-project-dialog/add-project-dialog
 import {ProjectStatus} from "../../enums/projectStatus";
 import {UserRole} from "../../enums/roles";
 import {EditProjectDialogComponent} from "./edit-project-dialog/edit-project-dialog.component";
+import {EditProjectMembersDialogComponent} from "./edit-project-members-dialog/edit-project-members-dialog.component";
 
 @Component({
   selector: 'app-projects',
@@ -26,7 +27,7 @@ export class ProjectsComponent implements OnInit {
   userRole = UserRole;
 
   //table variables
-  displayedColumns = ['title', 'description', 'status', 'role', 'detail'];
+  displayedColumns = ['title', 'description', 'status', 'owner', 'detail'];
   dataSource = new MatTableDataSource<IProject>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -52,6 +53,14 @@ export class ProjectsComponent implements OnInit {
     return member !== undefined ? member.role : 'No role';
   }
 
+  getProjectOwner(members: [IProjectMember]): string {
+    let member = members.find(i => i.role == this.userRole.owner);
+    if (member !== undefined)
+      return member.email == this.userEmail ? 'You' : member.name;
+    else
+      return 'No one';
+  }
+
   editProjectModal(project: IProject): void {
     const dialogRef = this.dialog.open(EditProjectDialogComponent, {
       width: '60%',
@@ -59,11 +68,25 @@ export class ProjectsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result) {
+      if (result) {
         project.title = result.value.title;
         project.description = result.value.description;
         project.status = result.value.status;
 
+        this.projectService.updateProject(project);
+      }
+    })
+  }
+
+  editProjectMembersModal(project: IProject): void {
+    const dialogRef = this.dialog.open(EditProjectMembersDialogComponent, {
+      width: '60%',
+      data: project.member_info
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        project.member_info = result;
         this.projectService.updateProject(project);
       }
     })
@@ -75,7 +98,7 @@ export class ProjectsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result) {
+      if (result) {
         const memberInfo = {
           name: result.value.username,
           role: this.userRole.owner,
