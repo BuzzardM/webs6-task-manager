@@ -14,6 +14,7 @@ import {ProjectStatus} from "../../enums/projectStatus";
 import {UserRole} from "../../enums/roles";
 import {EditProjectDialogComponent} from "./edit-project-dialog/edit-project-dialog.component";
 import {EditProjectMembersDialogComponent} from "./edit-project-members-dialog/edit-project-members-dialog.component";
+import {ArchiveProjectDialogComponent} from "./archive-project-dialog/archive-project-dialog.component";
 
 @Component({
   selector: 'app-projects',
@@ -130,6 +131,18 @@ export class ProjectsComponent implements OnInit {
         project.member_info.push(result.value);
         this.projectService.updateProject(project);
       }
+    })
+  }
+
+  archiveProjectModal(project: IProject): void {
+    const dialogRef = this.dialog.open(ArchiveProjectDialogComponent, {
+      width: '60%',
+      data: project
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result)
+        this.projectService.archiveProject(project);
     })
   }
 }

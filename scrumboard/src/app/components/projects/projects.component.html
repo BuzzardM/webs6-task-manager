@@ -45,9 +45,9 @@
         <button *ngIf="getProjectRole(row.member_info) == userRole.owner" (click)="editProjectMembersModal(row)" class="margin-left-right" mat-mini-fab color="edit" matTooltip="Edit project members">
           <mat-icon>people</mat-icon>
         </button>
-<!--        <button (click)="archiveModal(row)" class="margin-right" mat-mini-fab color="primary" matTooltip="Archive project">-->
-<!--          <mat-icon>archive</mat-icon>-->
-<!--        </button>-->
+        <button *ngIf="getProjectRole(row.member_info) == userRole.owner" (click)="archiveProjectModal(row)" class="margin-right" mat-mini-fab color="primary" matTooltip="Archive project">
+          <mat-icon>archive</mat-icon>
+        </button>
 <!--        <button (click)="deleteModal(row)" mat-mini-fab color="delete" matTooltip="Delete project">-->
 <!--          <mat-icon>delete</mat-icon>-->
 <!--        </button>-->

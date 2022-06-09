@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {
   addDoc,
-  collection, collectionData, doc, Firestore, query, setDoc, where,
+  collection, collectionData, deleteDoc, doc, Firestore, query, setDoc, where,
 } from "@angular/fire/firestore";
 import {IProject} from "../../models/project";
 import {Observable} from "rxjs";
@@ -30,5 +30,16 @@ export class ProjectService {
 
     const projectRef = doc(this.db, `projects/${projectId}`);
     return setDoc(projectRef, project);
+  }
+
+  archiveProject(project: IProject) {
+    let projectId = project.id;
+    const projectRef = doc(this.db, `projects/${projectId}`);
+
+    deleteDoc(projectRef).then(() => {
+      delete project.id;
+      const archiveRef = collection(this.db, 'archived_projects');
+      return addDoc(archiveRef, project);
+    });
   }
 }
