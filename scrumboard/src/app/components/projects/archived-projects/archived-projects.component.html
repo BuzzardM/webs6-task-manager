@@ -1,11 +1,8 @@
 <div class="mat-elevation-z8 margin-left-right min-width-rem">
 
   <div class="margin-all">
-    <button mat-mini-fab class="top-button margin-right" routerLink="/archived-projects" color="primary" matTooltip="Archived projects">
-      <mat-icon>inventory</mat-icon>
-    </button>
-    <button mat-mini-fab class="top-button" (click)="addProjectModal()" color="primary" matTooltip="Add project">
-      <mat-icon>add</mat-icon>
+    <button mat-mini-fab class="top-button margin-right" routerLink="/projects" color="primary" matTooltip="Active projects">
+      <mat-icon>ballot</mat-icon>
     </button>
   </div>
 
@@ -33,20 +30,8 @@
     <ng-container matColumnDef="actions">
       <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <button routerLink="/projects/{{ row?.uid }}" mat-mini-fab color="primary" matTooltip="Open project page">
-          <mat-icon>open_in_new</mat-icon>
-        </button>
-        <button *ngIf="getProjectRole(row.member_info) == userRole.admin || getProjectRole(row.member_info) == userRole.owner" (click)="addMemberModal(row)" class="margin-left-right" mat-mini-fab color="primary" matTooltip="Invite user">
-          <mat-icon>person_add</mat-icon>
-        </button>
-        <button *ngIf="getProjectRole(row.member_info) == userRole.owner" (click)="editProjectModal(row)" class="margin-left" mat-mini-fab color="edit" matTooltip="Edit project">
-          <mat-icon>edit</mat-icon>
-        </button>
-        <button *ngIf="getProjectRole(row.member_info) == userRole.owner" (click)="editProjectMembersModal(row)" class="margin-left-right" mat-mini-fab color="edit" matTooltip="Edit project members">
-          <mat-icon>people</mat-icon>
-        </button>
-        <button *ngIf="getProjectRole(row.member_info) == userRole.owner" (click)="archiveProjectModal(row)" class="margin-right" mat-mini-fab color="primary" matTooltip="Archive project">
-          <mat-icon>archive</mat-icon>
+        <button (click)="restoreProjectModal(row)" class="margin-right" mat-mini-fab color="primary" matTooltip="Restore project">
+          <mat-icon>unarchive</mat-icon>
         </button>
       </mat-cell>
     </ng-container>

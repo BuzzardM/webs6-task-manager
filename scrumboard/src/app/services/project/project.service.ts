@@ -19,6 +19,11 @@ export class ProjectService {
     return collectionData(q, {idField: 'id'}) as Observable<IProject[]>;
   }
 
+  getArchivedProjects(userId: string): Observable<IProject[]> {
+    const q = query(collection(this.db, 'archived_projects'), where('members', 'array-contains', userId));
+    return collectionData(q, {idField: 'id'}) as Observable<IProject[]>;
+  }
+
   addProject(project: IProject) {
     const projectsRef = collection(this.db, 'projects');
     return addDoc(projectsRef, project);
@@ -39,6 +44,17 @@ export class ProjectService {
     deleteDoc(projectRef).then(() => {
       delete project.id;
       const archiveRef = collection(this.db, 'archived_projects');
+      return addDoc(archiveRef, project);
+    });
+  }
+
+  restoreProject(project: IProject) {
+    let projectId = project.id;
+    const projectRef = doc(this.db, `archived_projects/${projectId}`);
+
+    deleteDoc(projectRef).then(() => {
+      delete project.id;
+      const archiveRef = collection(this.db, 'projects');
       return addDoc(archiveRef, project);
     });
   }

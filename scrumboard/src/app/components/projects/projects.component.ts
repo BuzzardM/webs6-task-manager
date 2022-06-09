@@ -28,7 +28,7 @@ export class ProjectsComponent implements OnInit {
   userRole = UserRole;
 
   //table variables
-  displayedColumns = ['title', 'description', 'status', 'owner', 'detail'];
+  displayedColumns = ['title', 'description', 'status', 'owner', 'actions'];
   dataSource = new MatTableDataSource<IProject>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -141,8 +141,10 @@ export class ProjectsComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result)
+      if (result) {
+        project.status = this.projectStatus.closed;
         this.projectService.archiveProject(project);
+      }
     })
   }
 }
