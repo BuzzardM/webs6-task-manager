@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Archive project</h1>
+<div mat-dialog-content>
+  <p>Are you sure you want to archive project: <span style="font-weight: 500;">{{ project.title }}</span>?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onNoClick()" color="primary">Back</button>
+  <button mat-raised-button class="margin-left" [mat-dialog-close]="true" cdkFocusInitial color="edit">Yes, archive</button>
+</div>

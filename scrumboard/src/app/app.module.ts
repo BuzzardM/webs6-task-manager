@@ -46,7 +46,14 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HomeComponent} from './components/home/home.component';
 import {ProjectsComponent} from './components/projects/projects.component';
-import {AngularFireAuthGuard, AngularFireAuthGuardModule} from "@angular/fire/compat/auth-guard";
+import { AddProjectDialogComponent } from './components/projects/add-project-dialog/add-project-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import { AddMemberDialogComponent } from './components/projects/add-member-dialog/add-member-dialog.component';
+import { EditProjectDialogComponent } from './components/projects/edit-project-dialog/edit-project-dialog.component';
+import { EditProjectMembersDialogComponent } from './components/projects/edit-project-members-dialog/edit-project-members-dialog.component';
+import { ArchiveProjectDialogComponent } from './components/projects/archive-project-dialog/archive-project-dialog.component';
+import { ArchivedProjectsComponent } from './components/projects/archived-projects/archived-projects.component';
+import { RestoreProjectDialogComponent } from './components/projects/restore-project-dialog/restore-project-dialog.component';
 
 const materialModules = [
   CdkTreeModule,
@@ -89,7 +96,14 @@ const materialModules = [
     SignInComponent,
     SignUpComponent,
     HomeComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    AddProjectDialogComponent,
+    AddMemberDialogComponent,
+    EditProjectDialogComponent,
+    EditProjectMembersDialogComponent,
+    ArchiveProjectDialogComponent,
+    ArchivedProjectsComponent,
+    RestoreProjectDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -101,7 +115,8 @@ const materialModules = [
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
-    materialModules
+    materialModules,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent],
