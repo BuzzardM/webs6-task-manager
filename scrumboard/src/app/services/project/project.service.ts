@@ -13,6 +13,10 @@ export class ProjectService {
 
   constructor(private db: Firestore) {
   }
+  // TODO: Add route for retreiving single project
+  // getProject(projectId: string): Observable<IProject> {
+  //
+  // }
 
   getProjects(userId: string): Observable<IProject[]> {
     const q = query(collection(this.db, 'projects'), where('members', 'array-contains', userId));

@@ -46,14 +46,26 @@ import {FlexLayoutModule} from "@angular/flex-layout";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {HomeComponent} from './components/home/home.component';
 import {ProjectsComponent} from './components/projects/projects.component';
-import { AddProjectDialogComponent } from './components/projects/add-project-dialog/add-project-dialog.component';
+import {AddProjectDialogComponent} from './components/projects/add-project-dialog/add-project-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
-import { AddMemberDialogComponent } from './components/projects/add-member-dialog/add-member-dialog.component';
-import { EditProjectDialogComponent } from './components/projects/edit-project-dialog/edit-project-dialog.component';
-import { EditProjectMembersDialogComponent } from './components/projects/edit-project-members-dialog/edit-project-members-dialog.component';
-import { ArchiveProjectDialogComponent } from './components/projects/archive-project-dialog/archive-project-dialog.component';
-import { ArchivedProjectsComponent } from './components/projects/archived-projects/archived-projects.component';
-import { RestoreProjectDialogComponent } from './components/projects/restore-project-dialog/restore-project-dialog.component';
+import {AddMemberDialogComponent} from './components/projects/add-member-dialog/add-member-dialog.component';
+import {EditProjectDialogComponent} from './components/projects/edit-project-dialog/edit-project-dialog.component';
+import {
+  EditProjectMembersDialogComponent
+} from './components/projects/edit-project-members-dialog/edit-project-members-dialog.component';
+import {
+  ArchiveProjectDialogComponent
+} from './components/projects/archive-project-dialog/archive-project-dialog.component';
+import {ArchivedProjectsComponent} from './components/projects/archived-projects/archived-projects.component';
+import {
+  RestoreProjectDialogComponent
+} from './components/projects/restore-project-dialog/restore-project-dialog.component';
+import {BacklogComponent} from './components/project/backlog/backlog.component';
+import {SprintsComponent} from './components/project/sprints/sprints.component';
+import {ProjectNavComponent} from './components/project/project-nav/project-nav.component';
+import { AddUserStoryComponent } from './components/project/backlog/modals/add-user-story/add-user-story.component';
+import { AddSprintComponent } from './components/project/sprints/modals/add-sprint/add-sprint.component';
+import { EditUserStoryComponent } from './components/project/backlog/modals/edit-user-story/edit-user-story.component';
 
 const materialModules = [
   CdkTreeModule,
@@ -104,6 +116,12 @@ const materialModules = [
     ArchiveProjectDialogComponent,
     ArchivedProjectsComponent,
     RestoreProjectDialogComponent,
+    BacklogComponent,
+    SprintsComponent,
+    ProjectNavComponent,
+    AddUserStoryComponent,
+    AddSprintComponent,
+    EditUserStoryComponent,
   ],
   imports: [
     BrowserModule,

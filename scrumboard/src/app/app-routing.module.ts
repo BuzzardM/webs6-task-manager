@@ -6,6 +6,8 @@ import {HomeComponent} from "./components/home/home.component";
 import {ProjectsComponent} from "./components/projects/projects.component";
 import {canActivate, redirectLoggedInTo, redirectUnauthorizedTo} from "@angular/fire/auth-guard";
 import {ArchivedProjectsComponent} from "./components/projects/archived-projects/archived-projects.component";
+import {BacklogComponent} from "./components/project/backlog/backlog.component";
+import {SprintsComponent} from "./components/project/sprints/sprints.component";
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
@@ -32,14 +34,27 @@ const routes: Routes = [
   },
   {
     path: 'projects',
-    component: ProjectsComponent,
+    children: [
+      {
+        path: '',
+        component: ProjectsComponent
+      },
+      {
+        path: ':uid/backlog',
+        component: BacklogComponent
+      },
+      {
+        path: ':uid/sprints',
+        component: SprintsComponent,
+      }
+    ],
     ...canActivate(redirectUnauthorizedToLogin)
   },
   {
     path: 'archived-projects',
     component: ArchivedProjectsComponent,
     ...canActivate(redirectUnauthorizedToLogin)
-  }
+  },
 ];
 
 @NgModule({

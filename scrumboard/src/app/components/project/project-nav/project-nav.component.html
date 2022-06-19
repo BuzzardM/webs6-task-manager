@@ -1,0 +1,11 @@
+<mat-drawer-container id="body-div">
+  <mat-drawer mode="side" disableClose opened="true">
+    <mat-nav-list *ngIf="uid != null && uid != undefined">
+      <a mat-list-item routerLink="/projects/{{ uid }}/backlog">Backlog</a>
+      <a mat-list-item routerLink="/projects/{{ uid }}/sprints">Sprints</a>
+    </mat-nav-list>
+  </mat-drawer>
+  <mat-drawer-content>
+    <ng-content></ng-content>
+  </mat-drawer-content>
+</mat-drawer-container>
