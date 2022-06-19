@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {MatDialogRef} from "@angular/material/dialog";
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {IProjectMember} from "../../../../../models/projectMember";
+import {IProject} from "../../../../../models/project";
 
 @Component({
   selector: 'app-add-user-story',
@@ -10,9 +11,8 @@ import {IProjectMember} from "../../../../../models/projectMember";
 })
 export class AddUserStoryComponent {
   addUserStoryForm: FormGroup;
-  members: IProjectMember[];
 
-  constructor(public dialogRef: MatDialogRef<AddUserStoryComponent>, private formBuilder: FormBuilder) {
+  constructor(public dialogRef: MatDialogRef<AddUserStoryComponent>, private formBuilder: FormBuilder, @Inject(MAT_DIALOG_DATA) public members: IProjectMember[]) {
     this.addUserStoryForm = this.formBuilder.group({
       title: '',
       description: '',
@@ -20,9 +20,6 @@ export class AddUserStoryComponent {
       owner: '',
       status: 'new'
     })
-
-    // TODO: get members from backend with getProject() or getProjectMembers() or something
-    this.members = [];
   }
 
   onNoClick(): void {

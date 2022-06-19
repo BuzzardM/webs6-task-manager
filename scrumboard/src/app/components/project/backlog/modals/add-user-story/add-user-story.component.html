@@ -10,7 +10,7 @@
       </mat-grid-tile>
       <mat-grid-tile colspan="1">
         <mat-form-field appearance="outline">
-          <mat-label>Project description</mat-label>
+          <mat-label>Task description</mat-label>
           <input matInput formControlName="description" required>
         </mat-form-field>
       </mat-grid-tile>
@@ -24,7 +24,7 @@
         <mat-form-field appearance="outline">
           <mat-label>Owner</mat-label>
           <mat-select formControlName="owner" required>
-            <option *ngFor="let member of members" [value]="member.email">{{member.name}}</option>
+            <mat-option *ngFor="let member of members" [value]="member.email">{{member.name}}</mat-option>
           </mat-select>
         </mat-form-field>
       </mat-grid-tile>

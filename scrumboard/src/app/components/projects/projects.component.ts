@@ -22,7 +22,6 @@ import {ArchiveProjectDialogComponent} from "./archive-project-dialog/archive-pr
   styleUrls: ['./projects.component.sass']
 })
 export class ProjectsComponent implements OnInit {
-  projects: Observable<IProject[]> | undefined;
   userEmail: string | null | undefined;
   projectStatus = ProjectStatus;
   userRole = UserRole;

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {
   addDoc,
-  collection, collectionData, deleteDoc, doc, Firestore, query, setDoc, where,
+  collection, collectionData, deleteDoc, doc, docData, Firestore, query, setDoc, where,
 } from "@angular/fire/firestore";
 import {IProject} from "../../models/project";
 import {Observable} from "rxjs";
@@ -13,10 +13,11 @@ export class ProjectService {
 
   constructor(private db: Firestore) {
   }
-  // TODO: Add route for retreiving single project
-  // getProject(projectId: string): Observable<IProject> {
-  //
-  // }
+
+  getProject(projectId: string): Observable<IProject> {
+    const projectRef = doc(this.db, `projects/${projectId}`);
+    return docData(projectRef) as Observable<IProject>;
+  }
 
   getProjects(userId: string): Observable<IProject[]> {
     const q = query(collection(this.db, 'projects'), where('members', 'array-contains', userId));

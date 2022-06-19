@@ -16,6 +16,11 @@
         <mat-cell *matCellDef="let userStory"> {{ userStory.title }}</mat-cell>
       </ng-container>
 
+      <ng-container matColumnDef="owner">
+        <mat-header-cell *matHeaderCellDef>Owner</mat-header-cell>
+        <mat-cell *matCellDef="let userStory"> {{ userStory.owner }}</mat-cell>
+      </ng-container>
+
       <ng-container matColumnDef="status">
         <mat-header-cell *matHeaderCellDef>Status</mat-header-cell>
         <mat-cell *matCellDef="let userStory"> {{ userStory.status }}</mat-cell>
