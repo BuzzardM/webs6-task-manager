@@ -11,7 +11,9 @@ import {TaskService} from "../../../services/task/task.service";
 import {ActivatedRoute} from "@angular/router";
 import {ProjectService} from "../../../services/project/project.service";
 import {IProjectMember} from "../../../models/projectMember";
-import {IProject} from "../../../models/project";
+import {ArchiveProjectDialogComponent} from "../../projects/archive-project-dialog/archive-project-dialog.component";
+import {TaskStatus} from "../../../enums/taskStatus";
+import {EditTaskComponent} from "./modals/edit-task/edit-task.component";
 
 @Component({
   selector: 'app-backlog',
@@ -21,7 +23,8 @@ import {IProject} from "../../../models/project";
 export class BacklogComponent implements OnInit {
   projectId = this.route.snapshot.paramMap.get("uid");
   members: IProjectMember[] | undefined;
-  displayedColumns = ['title', 'status', 'owner', 'actions'];
+  taskStatus = TaskStatus;
+  displayedColumns = ['title', 'description', 'status', 'points', 'owner', 'actions'];
   dataSource = new MatTableDataSource<ITask>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -61,4 +64,38 @@ export class BacklogComponent implements OnInit {
     })
   }
 
+  editTaskModal(task: ITask): void {
+    const dialogRef = this.dialog.open(EditTaskComponent, {
+      width: '60%',
+      data: {
+        task: task,
+        members: this.members
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        task.title = result.value.title;
+        task.description = result.value.description;
+        task.points = result.value.points;
+        task.owner = result.value.owner;
+
+        this.taskService.updateTask(task);
+      }
+    })
+  }
+
+  archiveTaskModal(task: ITask): void {
+    const dialogRef = this.dialog.open(ArchiveProjectDialogComponent, {
+      width: '60%',
+      data: task
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        task.status = this.taskStatus.closed;
+        this.taskService.archiveTask(task);
+      }
+    })
+  }
 }

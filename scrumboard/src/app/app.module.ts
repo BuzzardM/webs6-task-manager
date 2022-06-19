@@ -65,7 +65,7 @@ import {SprintsComponent} from './components/project/sprints/sprints.component';
 import {ProjectNavComponent} from './components/project/project-nav/project-nav.component';
 import { AddUserStoryComponent } from './components/project/backlog/modals/add-user-story/add-user-story.component';
 import { AddSprintComponent } from './components/project/sprints/modals/add-sprint/add-sprint.component';
-import { EditUserStoryComponent } from './components/project/backlog/modals/edit-user-story/edit-user-story.component';
+import { EditTaskComponent } from './components/project/backlog/modals/edit-task/edit-task.component';
 
 const materialModules = [
   CdkTreeModule,
@@ -121,7 +121,7 @@ const materialModules = [
     ProjectNavComponent,
     AddUserStoryComponent,
     AddSprintComponent,
-    EditUserStoryComponent,
+    EditTaskComponent,
   ],
   imports: [
     BrowserModule,

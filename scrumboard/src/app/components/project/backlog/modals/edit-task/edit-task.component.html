@@ -1,0 +1,40 @@
+<h1 mat-dialog-title>Edit user story</h1>
+<div mat-dialog-content class="dialog">
+  <form [formGroup]="editTaskForm">
+    <mat-grid-list cols="1" rowHeight="80px">
+      <mat-grid-tile colspan="1">
+        <mat-form-field appearance="outline">
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title" required>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1">
+        <mat-form-field appearance="outline">
+          <mat-label>Task description</mat-label>
+          <input matInput formControlName="description" required>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1">
+        <mat-form-field appearance="outline">
+          <mat-label>Points</mat-label>
+          <input matInput type="number" formControlName="points" required>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1">
+        <mat-form-field appearance="outline">
+          <mat-label>Owner</mat-label>
+          <mat-select formControlName="owner" required>
+            <mat-option *ngFor="let member of members" [value]="member.email">{{member.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onNoClick()" color="delete">Back</button>
+  <button mat-raised-button class="margin-left" [mat-dialog-close]="editTaskForm"
+          [disabled]="!editTaskForm.valid"
+          color="success">Edit
+  </button>
+</div>
