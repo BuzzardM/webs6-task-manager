@@ -63,7 +63,7 @@ import {
 import {BacklogComponent} from './components/project/backlog/backlog.component';
 import {SprintsComponent} from './components/project/sprints/sprints.component';
 import {ProjectNavComponent} from './components/project/project-nav/project-nav.component';
-import { AddUserStoryComponent } from './components/project/backlog/modals/add-user-story/add-user-story.component';
+import { AddTaskComponent } from './components/project/backlog/modals/add-task/add-task.component';
 import { AddSprintComponent } from './components/project/sprints/modals/add-sprint/add-sprint.component';
 import { EditTaskComponent } from './components/project/backlog/modals/edit-task/edit-task.component';
 import { ArchiveTaskDialogComponent } from './components/project/backlog/modals/archive-task/archive-task-dialog.component';
@@ -124,7 +124,7 @@ const materialModules = [
     BacklogComponent,
     SprintsComponent,
     ProjectNavComponent,
-    AddUserStoryComponent,
+    AddTaskComponent,
     AddSprintComponent,
     EditTaskComponent,
     ArchiveTaskDialogComponent,

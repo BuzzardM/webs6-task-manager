@@ -5,14 +5,14 @@ import {IProjectMember} from "../../../../../models/projectMember";
 import {IProject} from "../../../../../models/project";
 
 @Component({
-  selector: 'app-add-user-story',
-  templateUrl: './add-user-story.component.html',
-  styleUrls: ['./add-user-story.component.sass']
+  selector: 'app-add-task',
+  templateUrl: './add-task.component.html',
+  styleUrls: ['./add-task.component.sass']
 })
-export class AddUserStoryComponent {
+export class AddTaskComponent {
   addUserStoryForm: FormGroup;
 
-  constructor(public dialogRef: MatDialogRef<AddUserStoryComponent>, private formBuilder: FormBuilder, @Inject(MAT_DIALOG_DATA) public members: IProjectMember[]) {
+  constructor(public dialogRef: MatDialogRef<AddTaskComponent>, private formBuilder: FormBuilder, @Inject(MAT_DIALOG_DATA) public members: IProjectMember[]) {
     this.addUserStoryForm = this.formBuilder.group({
       title: '',
       description: '',

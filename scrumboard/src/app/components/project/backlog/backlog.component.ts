@@ -1,11 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Observable} from "rxjs";
 import {MatPaginator} from "@angular/material/paginator";
 import {AuthService} from "../../../services/auth.service";
 import {UserService} from "../../../services/user/user.service";
 import {MatDialog} from "@angular/material/dialog";
 import {MatTableDataSource} from "@angular/material/table";
-import {AddUserStoryComponent} from "./modals/add-user-story/add-user-story.component";
+import {AddTaskComponent} from "./modals/add-task/add-task.component";
 import {ITask} from "../../../models/task";
 import {TaskService} from "../../../services/task/task.service";
 import {ActivatedRoute} from "@angular/router";
@@ -47,8 +46,8 @@ export class BacklogComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  addUserStoryModal() {
-    const dialogRef = this.dialog.open(AddUserStoryComponent, {
+  addTaskModal() {
+    const dialogRef = this.dialog.open(AddTaskComponent, {
       width: '60%',
       data: this.members
     });
