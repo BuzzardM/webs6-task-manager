@@ -56,6 +56,8 @@ export class BacklogComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         result.value.project_id = this.projectId;
+        result.value.created_at = new Date();
+        result.value.updated_at = new Date();
 
         const task = result.value as ITask;
         this.taskService.addTask(task);
@@ -78,6 +80,7 @@ export class BacklogComponent implements OnInit {
         task.description = result.value.description;
         task.points = result.value.points;
         task.owner = result.value.owner;
+        task.updated_at = new Date();
 
         this.taskService.updateTask(task);
       }

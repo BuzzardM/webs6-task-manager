@@ -6,4 +6,6 @@ export interface ITask {
   owner: string;
   project_id: string;
   points: number;
+  created_at: Date;
+  updated_at: Date;
 }

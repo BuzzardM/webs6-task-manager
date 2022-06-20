@@ -4,7 +4,6 @@ import {
   collection, collectionData, deleteDoc, doc, docData, Firestore, query, setDoc, where,
 } from "@angular/fire/firestore";
 import {Observable} from "rxjs";
-import {IProject} from "../../models/project";
 import {ITask} from "../../models/task";
 
 @Injectable({
