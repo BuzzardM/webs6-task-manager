@@ -37,6 +37,10 @@ export class SprintsComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
+  openBoard(sprint: ISprint) {
+
+  }
+
   addSprintModal() {
     const dialogRef = this.dialog.open(AddSprintComponent, {
       width: '60%'
