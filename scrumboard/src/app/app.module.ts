@@ -66,6 +66,9 @@ import {ProjectNavComponent} from './components/project/project-nav/project-nav.
 import { AddUserStoryComponent } from './components/project/backlog/modals/add-user-story/add-user-story.component';
 import { AddSprintComponent } from './components/project/sprints/modals/add-sprint/add-sprint.component';
 import { EditTaskComponent } from './components/project/backlog/modals/edit-task/edit-task.component';
+import { ArchiveTaskDialogComponent } from './components/project/backlog/modals/archive-task/archive-task-dialog.component';
+import { ArchivedBacklogComponent } from './components/project/archived-backlog/archived-backlog.component';
+import { RestoreTaskDialogComponent } from './components/project/archived-backlog/modals/restore-task-dialog/restore-task-dialog.component';
 
 const materialModules = [
   CdkTreeModule,
@@ -122,6 +125,9 @@ const materialModules = [
     AddUserStoryComponent,
     AddSprintComponent,
     EditTaskComponent,
+    ArchiveTaskDialogComponent,
+    ArchivedBacklogComponent,
+    RestoreTaskDialogComponent,
   ],
   imports: [
     BrowserModule,

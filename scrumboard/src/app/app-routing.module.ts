@@ -8,6 +8,10 @@ import {canActivate, redirectLoggedInTo, redirectUnauthorizedTo} from "@angular/
 import {ArchivedProjectsComponent} from "./components/projects/archived-projects/archived-projects.component";
 import {BacklogComponent} from "./components/project/backlog/backlog.component";
 import {SprintsComponent} from "./components/project/sprints/sprints.component";
+import {ArchiveTaskDialogComponent} from "./components/project/backlog/modals/archive-task/archive-task-dialog.component";
+import {
+  ArchivedBacklogComponent
+} from "./components/project/archived-backlog/archived-backlog.component";
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
@@ -46,6 +50,10 @@ const routes: Routes = [
       {
         path: ':uid/sprints',
         component: SprintsComponent,
+      },
+      {
+        path: ':uid/archived-tasks',
+        component: ArchivedBacklogComponent,
       }
     ],
     ...canActivate(redirectUnauthorizedToLogin)

@@ -41,7 +41,6 @@ export class BacklogComponent implements OnInit {
         this.dataSource.data = t;
       });
     }
-
   }
 
   ngAfterViewInit() {
