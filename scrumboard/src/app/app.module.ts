@@ -26,7 +26,7 @@ import {MatListModule} from "@angular/material/list";
 import {MatMenuModule} from "@angular/material/menu";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatPaginatorModule} from "@angular/material/paginator";
-import {MatRippleModule} from "@angular/material/core";
+import {MatNativeDateModule, MatRippleModule} from "@angular/material/core";
 import {MatSelectModule} from "@angular/material/select";
 import {MatSidenavModule} from "@angular/material/sidenav";
 import {MatSnackBarModule} from "@angular/material/snack-bar";
@@ -102,7 +102,8 @@ const materialModules = [
   MatGridListModule,
   MatRadioModule,
   MatDatepickerModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatNativeDateModule
 ]
 
 @NgModule({
