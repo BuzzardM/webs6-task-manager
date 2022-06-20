@@ -17,7 +17,7 @@ import {EditSprintDialogComponent} from "./modals/edit-sprint-dialog/edit-sprint
   styleUrls: ['./sprints.component.sass']
 })
 export class SprintsComponent implements OnInit {
-  projectId = this.route.snapshot.paramMap.get("uid");
+  projectId = this.route.snapshot.paramMap.get("projectId");
   displayedColumns = ['title', 'description', 'start_date', 'end_date', 'actions'];
   dataSource = new MatTableDataSource<ISprint>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;

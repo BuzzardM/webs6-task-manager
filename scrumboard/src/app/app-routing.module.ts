@@ -12,6 +12,7 @@ import {ArchiveTaskDialogComponent} from "./components/project/backlog/modals/ar
 import {
   ArchivedBacklogComponent
 } from "./components/project/archived-backlog/archived-backlog.component";
+import {BoardComponent} from "./components/project/sprints/board/board.component";
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
@@ -44,16 +45,30 @@ const routes: Routes = [
         component: ProjectsComponent
       },
       {
-        path: ':uid/backlog',
-        component: BacklogComponent
-      },
-      {
-        path: ':uid/sprints',
-        component: SprintsComponent,
-      },
-      {
-        path: ':uid/archived-tasks',
-        component: ArchivedBacklogComponent,
+        path: ':projectId',
+        children: [
+          {
+            path: 'backlog',
+            component: BacklogComponent
+          },
+          {
+            path: 'sprints',
+            children: [
+              {
+                path: '',
+                component: SprintsComponent
+              },
+              {
+                path: ':sprintId',
+                component: BoardComponent
+              }
+            ]
+          },
+          {
+            path: 'archived-tasks',
+            component: ArchivedBacklogComponent
+          }
+          ]
       }
     ],
     ...canActivate(redirectUnauthorizedToLogin)

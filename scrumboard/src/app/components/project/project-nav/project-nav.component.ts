@@ -7,12 +7,11 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./project-nav.component.sass']
 })
 export class ProjectNavComponent implements OnInit {
-  uid: string | null | undefined;
+  projectId: string | null = this.route.snapshot.paramMap.get("projectId");
 
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.uid = this.route.snapshot.paramMap.get("uid");
   }
 
 }

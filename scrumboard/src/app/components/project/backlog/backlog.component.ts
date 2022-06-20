@@ -20,7 +20,7 @@ import {EditTaskComponent} from "./modals/edit-task/edit-task.component";
   styleUrls: ['./backlog.component.sass']
 })
 export class BacklogComponent implements OnInit {
-  projectId = this.route.snapshot.paramMap.get("uid");
+  projectId = this.route.snapshot.paramMap.get("projectId");
   members: IProjectMember[] | undefined;
   taskStatus = TaskStatus;
   displayedColumns = ['title', 'description', 'status', 'points', 'owner', 'actions'];
