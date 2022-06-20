@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {addDoc, collection, collectionData, Firestore, query, where} from "@angular/fire/firestore";
+import {addDoc, collection, collectionData, doc, Firestore, query, setDoc, where} from "@angular/fire/firestore";
 import {Observable} from "rxjs";
 import {ITask} from "../../models/task";
 import {ISprint} from "../../models/sprint";
@@ -21,5 +21,14 @@ export class SprintService {
   addSprint(sprint: ISprint) {
     const sprintsRef = collection(this.db, 'sprints');
     return addDoc(sprintsRef, sprint);
+  }
+
+  updateSprint(sprint: ISprint) {
+
+      let sprintId = sprint.id;
+      delete sprint.id;
+
+      const sprintRef = doc(this.db, `sprints/${sprintId}`);
+      return setDoc(sprintRef, sprint);
   }
 }

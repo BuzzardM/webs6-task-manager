@@ -1,6 +1,6 @@
-<h1 mat-dialog-title>Add sprint</h1>
+<h1 mat-dialog-title>Edit sprint</h1>
 <div mat-dialog-content class="dialog">
-  <form [formGroup]="addSprintForm">
+  <form [formGroup]="editSprintForm">
     <mat-grid-list cols="1" rowHeight="80px">
       <mat-grid-tile colspan="1">
         <mat-form-field appearance="outline">
@@ -17,7 +17,7 @@
       <mat-grid-tile colspan="1">
         <mat-form-field appearance="outline">
           <mat-label>Start date</mat-label>
-          <input matInput [min]="today" [matDatepicker]="startDate" (dateChange)="changeMinDate($event)" placeholder="Choose start date" formControlName="start_date" required>
+          <input matInput [min]="today" [matDatepicker]="startDate" (dateChange)="changeMinDate($event.value)" placeholder="Choose start date" formControlName="start_date" required>
           <mat-datepicker-toggle matSuffix [for]="$any(startDate)"></mat-datepicker-toggle>
           <mat-datepicker #startDate></mat-datepicker>
         </mat-form-field>
@@ -35,8 +35,8 @@
 </div>
 <div mat-dialog-actions>
   <button mat-raised-button (click)="onNoClick()" color="delete">Back</button>
-  <button mat-raised-button class="margin-left" [mat-dialog-close]="addSprintForm"
-          [disabled]="!addSprintForm.valid"
-          color="success">Add
+  <button mat-raised-button class="margin-left" [mat-dialog-close]="editSprintForm"
+          [disabled]="!editSprintForm.valid"
+          color="success">Edit
   </button>
 </div>

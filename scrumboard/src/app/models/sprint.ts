@@ -1,6 +1,7 @@
 import {ITask} from "./task";
 
 export interface ISprint {
+  id?: number;
   title: string;
   description: string;
   start_date: Date;

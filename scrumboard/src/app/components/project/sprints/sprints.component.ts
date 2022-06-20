@@ -9,6 +9,7 @@ import {ISprint} from "../../../models/sprint";
 import {SprintService} from "../../../services/sprint/sprint.service";
 import {AddSprintComponent} from "./modals/add-sprint/add-sprint.component";
 import {ActivatedRoute} from "@angular/router";
+import {EditSprintDialogComponent} from "./modals/edit-sprint-dialog/edit-sprint-dialog.component";
 
 @Component({
   selector: 'app-sprints',
@@ -52,9 +53,20 @@ export class SprintsComponent implements OnInit {
   }
 
   editSprintModal(sprint: ISprint) {
-    const dialogRef = this.dialog.open(AddSprintComponent, {
+    const dialogRef = this.dialog.open(EditSprintDialogComponent, {
       width: '60%',
       data: sprint
     });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        sprint.title = result.value.title;
+        sprint.description = result.value.description;
+        sprint.start_date = result.value.start_date;
+        sprint.end_date = result.value.end_date;
+
+        this.sprintService.updateSprint(sprint);
+      }
+    })
   }
 }
