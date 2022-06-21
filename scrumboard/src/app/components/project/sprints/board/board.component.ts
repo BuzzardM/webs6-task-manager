@@ -9,6 +9,9 @@ import {TaskStatus} from "../../../../enums/taskStatus";
 import {moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {TaskService} from "../../../../services/task/task.service";
 import {mergeMap} from "rxjs";
+import {AddSprintComponent} from "../modals/add-sprint/add-sprint.component";
+import {ISprint} from "../../../../models/sprint";
+import {AssignTaskDialogComponent} from "../modals/assign-task-dialog/assign-task-dialog.component";
 
 @Component({
   selector: 'app-board',
@@ -74,5 +77,14 @@ export class BoardComponent implements OnInit {
 
       this.taskService.updateTask(task);
     }
+  }
+
+  assignTaskModal() {
+    const dialogRef = this.dialog.open(AssignTaskDialogComponent, {
+      width: '60%'
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    })
   }
 }
