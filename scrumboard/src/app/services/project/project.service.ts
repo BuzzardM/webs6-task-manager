@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {
   addDoc,
-  collection, collectionData, deleteDoc, doc, docData, Firestore, query, setDoc, where,
+  collection, collectionData, deleteDoc, doc, docData, Firestore, getDoc, query, setDoc, updateDoc, where,
 } from "@angular/fire/firestore";
 import {IProject} from "../../models/project";
 import {Observable} from "rxjs";
@@ -62,5 +62,10 @@ export class ProjectService {
       const archiveRef = collection(this.db, 'projects');
       return addDoc(archiveRef, project);
     });
+  }
+
+  setActiveSprint(sprintId: string, projectId: string) {
+    const projectRef = doc(this.db, `projects/${projectId}`);
+    return updateDoc(projectRef, {active_sprint: sprintId});
   }
 }
