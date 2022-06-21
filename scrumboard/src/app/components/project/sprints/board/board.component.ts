@@ -21,8 +21,7 @@ export class BoardComponent implements OnInit {
   taskStatus = TaskStatus;
   tasks: ITask[] | undefined;
   members: IProjectMember[] | undefined;
-
-  assignedTask = new Map<string, Map<TaskStatus, ITask[]>>();
+  assignedTasks = new Map<string, Map<TaskStatus, ITask[]>>();
 
   constructor(private projectService: ProjectService, private taskService: TaskService, private route: ActivatedRoute, private sprintService: SprintService, private dialog: MatDialog) {
 
@@ -40,7 +39,7 @@ export class BoardComponent implements OnInit {
           if (task.assigned_to === undefined) {
             this.tasks?.push(task);
           } else if (task.assigned_to != undefined)
-            this.assignedTask.get(task.assigned_to)!.get(<TaskStatus>task.status)!.push(task);
+            this.assignedTasks.get(task.assigned_to)!.get(<TaskStatus>task.status)!.push(task);
         }
       });
     }
@@ -51,7 +50,7 @@ export class BoardComponent implements OnInit {
 
   initAssignedTasks(members: IProjectMember[]) {
     for (let member of members) {
-      let userTasks = this.assignedTask.set(member.email, new Map<TaskStatus, ITask[]>()).get(member.email)!;
+      let userTasks = this.assignedTasks.set(member.email, new Map<TaskStatus, ITask[]>()).get(member.email)!;
 
       for (let status of Object.values(TaskStatus))
         userTasks.set(status, []);
