@@ -3,7 +3,6 @@ import {addDoc, collection, collectionData, doc, Firestore, query, setDoc, where
 import {Observable} from "rxjs";
 import {ITask} from "../../models/task";
 import {ISprint} from "../../models/sprint";
-import {IProject} from "../../models/project";
 
 @Injectable({
   providedIn: 'root'

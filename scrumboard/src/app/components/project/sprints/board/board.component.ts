@@ -8,7 +8,7 @@ import {ProjectService} from "../../../../services/project/project.service";
 import {TaskStatus} from "../../../../enums/taskStatus";
 import {moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {TaskService} from "../../../../services/task/task.service";
-import {mergeMap, Subscription} from "rxjs";
+import {async, map, mergeMap} from "rxjs";
 
 @Component({
   selector: 'app-board',
@@ -28,28 +28,21 @@ export class BoardComponent implements OnInit {
   constructor(private projectService: ProjectService, private taskService: TaskService, private route: ActivatedRoute, private sprintService: SprintService, private dialog: MatDialog) {
 
     if (this.sprintId != null && this.projectId != null) {
-
       this.projectService.getProject(this.projectId).pipe(
-        mergeMap(p => this.sprintService.getSprintTasks(this.sprintId!)),
-      ).subscribe(tasks => {
-        console.log(tasks);
-      });
+        mergeMap(p => {
+          this.members = p.member_info;
+          return this.sprintService.getSprintTasks(this.sprintId!);
+        })
+      ).subscribe(t => {
+        this.initAssignedTasks(this.members!);
+        this.tasks = [];
 
-      this.projectService.getProject(this.projectId).subscribe(p => {
-
-        this.members = p.member_info;
-
-        this.sub = this.sprintService.getSprintTasks(this.sprintId!).subscribe(t => {
-          this.tasks = [];
-          this.initAssignedTasks(p.member_info);
-          for (let task of t) {
-            if (task.assigned_to === undefined && !this.tasks?.includes(task)){
-              this.tasks?.push(task);
-            }
-            else if (task.assigned_to != undefined && !this.assignedTask.get(task.assigned_to)!.get(<TaskStatus>task.status)!.some(x => x.id == task.id))
-              this.assignedTask.get(task.assigned_to)!.get(<TaskStatus>task.status)!.push(task);
-          }
-        });
+        for (let task of t) {
+          if (task.assigned_to === undefined) {
+            this.tasks?.push(task);
+          } else if (task.assigned_to != undefined)
+            this.assignedTask.get(task.assigned_to)!.get(<TaskStatus>task.status)!.push(task);
+        }
       });
     }
   }
@@ -78,7 +71,7 @@ export class BoardComponent implements OnInit {
       );
 
       let task = event.container.data[event.currentIndex];
-      member === null ? delete(task.assigned_to) : task.assigned_to = member;
+      member === null ? delete (task.assigned_to) : task.assigned_to = member;
       if (status != null) task.status = status;
 
       this.taskService.updateTask(task);
