@@ -76,14 +76,15 @@ export class SprintsComponent implements OnInit {
     })
   }
 
-  setActiveSprintModal(sprintId: string) {
+  setActiveSprintModal(sprint: ISprint) {
     const dialogRef = this.dialog.open(SetActiveDialogComponent, {
       width: '60%',
+      data: sprint.title
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.projecService.setActiveSprint(sprintId, this.projectId!);
+        this.projecService.setActiveSprint(sprint.id!, this.projectId!);
       }
     })
   }
