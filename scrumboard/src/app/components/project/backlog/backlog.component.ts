@@ -55,6 +55,7 @@ export class BacklogComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
         result.value.project_id = this.projectId;
+        result.value.assigned_sprint = null;
         result.value.created_at = new Date();
         result.value.updated_at = new Date();
 

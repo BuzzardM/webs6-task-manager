@@ -1,1 +1,14 @@
-<p>assign-task-dialog works!</p>
+<h1 mat-dialog-title>Add task to sprint</h1>
+<div mat-dialog-content class="dialog">
+  <mat-selection-list #addedTasks [(ngModel)]="selectedTasks">
+    <mat-list-option *ngFor="let task of tasks" [value]="task">
+      {{ task.title }}
+    </mat-list-option>
+  </mat-selection-list>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onNoClick()" color="delete">Back</button>
+  <button mat-raised-button class="margin-left" [mat-dialog-close]="selectedTasks" [disabled]="selectedTasks.length <= 0"
+          color="success">Add
+  </button>
+</div>

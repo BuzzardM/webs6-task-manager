@@ -23,15 +23,22 @@ export class SprintService {
   }
 
   updateSprint(sprint: ISprint) {
-      let sprintId = sprint.id;
-      delete sprint.id;
+    const sprintId = sprint.id;
+    const { id, ...rest } = sprint;
 
-      const sprintRef = doc(this.db, `sprints/${sprintId}`);
-      return setDoc(sprintRef, sprint);
+    const sprintRef = doc(this.db, `sprints/${sprintId}`);
+    return setDoc(sprintRef, rest);
   }
 
   getSprintTasks(sprintId: string) {
     const q = query(collection(this.db, 'tasks'), where('assigned_sprint', '==', sprintId));
+    return collectionData(q, {idField: 'id'}) as Observable<ITask[]>;
+  }
+
+  getUnassignedTasks(sprintId: string, projectId: string) {
+    const q = query(collection(this.db, 'tasks'),
+      where('assigned_sprint', '==', null),
+      where('project_id', '==', projectId))
     return collectionData(q, {idField: 'id'}) as Observable<ITask[]>;
   }
 }

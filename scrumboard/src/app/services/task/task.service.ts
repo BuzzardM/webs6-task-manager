@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {
   addDoc,
-  collection, collectionData, deleteDoc, doc, docData, Firestore, query, setDoc, where,
+  collection, collectionData, deleteDoc, doc, docData, Firestore, query, setDoc, where, writeBatch,
 } from "@angular/fire/firestore";
 import {Observable} from "rxjs";
 import {ITask} from "../../models/task";
@@ -35,6 +35,23 @@ export class TaskService {
 
     const taskRef = doc(this.db, `tasks/${taskId}`);
     return setDoc(taskRef, rest);
+  }
+
+  updateTasks(tasks: ITask[], sprintId: string) {
+    const batch = writeBatch(this.db);
+
+    for (let task of tasks) {
+      task.assigned_sprint = sprintId;
+
+      const taskId = task.id;
+      const { id, ...rest } = task;
+      const taskRef = doc(this.db, `tasks/${taskId}`);
+
+      console.log(rest);
+      batch.set(taskRef, rest);
+    }
+
+    batch.commit();
   }
 
   archiveTask(task: ITask) {
