@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {FormBuilder, FormGroup} from "@angular/forms";
 import {IProjectMember} from "../../../../../models/projectMember";
 import {IProject} from "../../../../../models/project";
+import {TaskStatus} from "../../../../../enums/taskStatus";
 
 @Component({
   selector: 'app-add-task',
@@ -11,6 +12,7 @@ import {IProject} from "../../../../../models/project";
 })
 export class AddTaskComponent {
   addUserStoryForm: FormGroup;
+  taskStatus = TaskStatus;
 
   constructor(public dialogRef: MatDialogRef<AddTaskComponent>, private formBuilder: FormBuilder, @Inject(MAT_DIALOG_DATA) public members: IProjectMember[]) {
     this.addUserStoryForm = this.formBuilder.group({
@@ -18,7 +20,7 @@ export class AddTaskComponent {
       description: '',
       points: 0,
       owner: '',
-      status: 'new'
+      status: this.taskStatus.todo
     })
   }
 

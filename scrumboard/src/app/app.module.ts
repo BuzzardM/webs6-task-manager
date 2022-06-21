@@ -71,6 +71,7 @@ import { ArchivedBacklogComponent } from './components/project/archived-backlog/
 import { RestoreTaskDialogComponent } from './components/project/archived-backlog/modals/restore-task-dialog/restore-task-dialog.component';
 import { EditSprintDialogComponent } from './components/project/sprints/modals/edit-sprint-dialog/edit-sprint-dialog.component';
 import { BoardComponent } from './components/project/sprints/board/board.component';
+import {DragDropModule} from "@angular/cdk/drag-drop";
 
 const materialModules = [
   CdkTreeModule,
@@ -134,19 +135,20 @@ const materialModules = [
     EditSprintDialogComponent,
     BoardComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore()),
-    BrowserAnimationsModule,
-    FlexLayoutModule,
-    FormsModule,
-    ReactiveFormsModule,
-    materialModules,
-    MatDialogModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        provideFirebaseApp(() => initializeApp(environment.firebase)),
+        provideAuth(() => getAuth()),
+        provideFirestore(() => getFirestore()),
+        BrowserAnimationsModule,
+        FlexLayoutModule,
+        FormsModule,
+        ReactiveFormsModule,
+        materialModules,
+        MatDialogModule,
+        DragDropModule
+    ],
   providers: [],
   bootstrap: [AppComponent],
 })

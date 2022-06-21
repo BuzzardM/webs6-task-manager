@@ -30,11 +30,11 @@ export class TaskService {
   }
 
   updateTask(task: ITask) {
-    let taskId = task.id;
-    delete task.id;
+    const taskId = task.id;
+    const { id, ...rest } = task;
 
     const taskRef = doc(this.db, `tasks/${taskId}`);
-    return setDoc(taskRef, task);
+    return setDoc(taskRef, rest);
   }
 
   archiveTask(task: ITask) {

@@ -1,1 +1,55 @@
-<p>board works!</p>
+<app-project-nav>
+  <div class="board-wrapper">
+    <div class="container">
+
+      <div class="board" cdkDropListGroup>
+
+        <div class="board-item" cdkDropList [cdkDropListData]="tasks" (cdkDropListDropped)="dropTask($event, null, null)">
+          <mat-card class="item" *ngFor="let task of tasks" cdkDrag>
+            <h2>{{ task.title }}</h2>
+            <p> {{ task.description }}</p>
+          </mat-card>
+        </div>
+
+        <div class="member-row" *ngFor="let member of members">
+          <mat-card class="item">
+            <p>{{member.name}}</p>
+            <p>{{member.email}}</p>
+          </mat-card>
+
+          <div class="board-item" cdkDropList [cdkDropListData]="assignedTask.get(member.email)?.get(taskStatus.todo)" (cdkDropListDropped)="dropTask($event, member.email, taskStatus.todo)">
+            <h2>Todo</h2>
+            <mat-card class="item" *ngFor="let task of assignedTask.get(member.email)?.get(taskStatus.todo)" cdkDrag>
+              <h2>{{ task.title }}</h2>
+              <p> {{ task.description }}</p>
+            </mat-card>
+          </div>
+
+          <div class="board-item" cdkDropList [cdkDropListData]="assignedTask.get(member.email)?.get(taskStatus.inProgress)" (cdkDropListDropped)="dropTask($event, member.email, taskStatus.inProgress)">
+            <h2>In progress</h2>
+            <mat-card class="item" *ngFor="let task of assignedTask.get(member.email)?.get(taskStatus.inProgress)" cdkDrag>
+              <h2>{{ task.title }}</h2>
+              <p> {{ task.description }}</p>
+            </mat-card>
+          </div>
+
+          <div class="board-item" cdkDropList [cdkDropListData]="assignedTask.get(member.email)?.get(taskStatus.review)" (cdkDropListDropped)="dropTask($event, member.email, taskStatus.review)">
+            <h2>Review</h2>
+            <mat-card class="item" *ngFor="let task of assignedTask.get(member.email)?.get(taskStatus.review)" cdkDrag>
+              <h2>{{ task.title }}</h2>
+              <p> {{ task.description }}</p>
+            </mat-card>
+          </div>
+
+          <div class="board-item" cdkDropList [cdkDropListData]="assignedTask.get(member.email)?.get(taskStatus.done)" (cdkDropListDropped)="dropTask($event, member.email, taskStatus.done)">
+            <h2>Done</h2>
+            <mat-card class="item" *ngFor="let task of assignedTask.get(member.email)?.get(taskStatus.done)" cdkDrag>
+              <h2>{{ task.title }}</h2>
+              <p> {{ task.description }}</p>
+            </mat-card>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</app-project-nav>

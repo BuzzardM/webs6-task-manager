@@ -48,7 +48,7 @@ export class ArchivedBacklogComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        task.status = this.taskStatus.open;
+        task.status = this.taskStatus.todo;
         this.taskService.restoreTask(task);
       }
     })

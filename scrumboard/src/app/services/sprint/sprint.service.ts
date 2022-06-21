@@ -24,11 +24,15 @@ export class SprintService {
   }
 
   updateSprint(sprint: ISprint) {
-
       let sprintId = sprint.id;
       delete sprint.id;
 
       const sprintRef = doc(this.db, `sprints/${sprintId}`);
       return setDoc(sprintRef, sprint);
+  }
+
+  getSprintTasks(sprintId: string) {
+    const q = query(collection(this.db, 'tasks'), where('assigned_sprint', '==', sprintId));
+    return collectionData(q, {idField: 'id'}) as Observable<ITask[]>;
   }
 }

@@ -94,7 +94,7 @@ export class BacklogComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        task.status = this.taskStatus.closed;
+        task.status = this.taskStatus.done;
         this.taskService.archiveTask(task);
       }
     })

@@ -5,6 +5,7 @@ export interface IProject {
   title: string;
   description: string;
   status: string;
+  active_sprint: string;
   members: [];
   member_info: [IProjectMember];
 }
