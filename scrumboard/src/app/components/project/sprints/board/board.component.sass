@@ -1,8 +1,65 @@
-.member-row
-  display: flex
+#top-container
+  height: 5%
+  margin: 1rem
 
-.member-row > .item
+#backlog
+  flex: 1 0 auto
+
+#main-container
+  display: flex
+  flex-direction: row
+  width: 100%
+  padding: 0.5rem
+  box-sizing: border-box
+
+#left-container
+  min-width: 20%
+  max-width: 20%
+  flex: 20%
+  display: flex
+  flex-direction: column
+  padding-right: 1rem
+  box-sizing: border-box
+
+#right-container
+  min-width: 80%
+  max-width: 80%
+  flex: 80%
+
+#board-wrapper
+  display: flex
+  flex-direction: column
+
+.board-row
+  display: flex
+  flex-direction: row
+  flex-wrap: nowrap
+  border-bottom: #FFFFFF 1px solid
+
+.board-row:first-child
+  border-top: #FFFFFF 1px solid
+
+.board-row:not(:first-child)
+  min-height: 10rem
+
+.board-col
+  flex: 1 0 auto
   width: 15rem
+  border-right: #FFFFFF 1px solid
+
+.board-col:first-child
+  border-left: #FFFFFF 1px solid
+
+.board-col>h2
+  font-size: 1.5rem
+  font-weight: bold
+
+.board-col:not(:first-child)>h2
+  margin-left: 0.5rem
+
+.board-col:first-child
+  flex: 2
 
 .board-item
-  width: 15rem
+  border-radius: 1rem
+  margin: 0.5rem
