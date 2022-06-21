@@ -8,7 +8,7 @@ import {ProjectService} from "../../../../services/project/project.service";
 import {TaskStatus} from "../../../../enums/taskStatus";
 import {moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {TaskService} from "../../../../services/task/task.service";
-import {async, map, mergeMap} from "rxjs";
+import {mergeMap} from "rxjs";
 
 @Component({
   selector: 'app-board',
@@ -21,7 +21,6 @@ export class BoardComponent implements OnInit {
   taskStatus = TaskStatus;
   tasks: ITask[] | undefined;
   members: IProjectMember[] | undefined;
-  sub: Subscription | undefined;
 
   assignedTask = new Map<string, Map<TaskStatus, ITask[]>>();
 
