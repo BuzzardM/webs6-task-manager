@@ -1,25 +1,24 @@
 <app-project-nav>
-  <div id="top-container">
-    <button mat-mini-fab class="top-button" (click)="assignTaskModal()" color="primary" matTooltip="Add task">
-      <mat-icon>add</mat-icon>
-    </button>
-  </div>
   <div id="main-container" cdkDropListGroup>
     <div id="left-container">
-      <div>
-        <mat-card>
-          <mat-card-header>
-            <mat-card-title>
-              <h1>Tasks</h1>
-            </mat-card-title>
-          </mat-card-header>
-        </mat-card>
-      </div>
-      <div id="backlog" cdkDropList [cdkDropListData]="tasks" (cdkDropListDropped)="dropTask($event, null, null)">
-        <mat-card class="board-item" *ngFor="let task of tasks" cdkDrag>
-          <h2>{{ task.title }}</h2>
-          <p> {{ task.description }}</p>
-        </mat-card>
+      <div id="backlog-wrapper">
+        <div id="backlog-header-div">
+          <div class="backlog-header-col">
+            <h1 class="custom-h1">Tasks</h1>
+          </div>
+          <div class="backlog-header-col"></div>
+          <div class="backlog-header-col">
+            <button mat-mini-fab class="top-button" (click)="assignTaskModal()" color="primary" matTooltip="Add task">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </div>
+        <div id="backlog" cdkDropList [cdkDropListData]="tasks" (cdkDropListDropped)="dropTask($event, null, null)">
+          <mat-card class="board-item" *ngFor="let task of tasks" cdkDrag>
+            <h2>{{ task.title }}</h2>
+            <p> {{ task.description }}</p>
+          </mat-card>
+        </div>
       </div>
     </div>
     <div id="right-container">
@@ -43,8 +42,10 @@
         </div>
         <div class="board-row" *ngFor="let member of members">
           <div class="board-col">
-            <h1>{{ member.name }}</h1>
-            <h4>{{ member.email }}</h4>
+            <div class="custom-card">
+              <h1>{{ member.name }}</h1>
+              <h4>{{ member.email }}</h4>
+            </div>
           </div>
           <div cdkDropList class="board-col"
                [cdkDropListData]="assignedTasks.get(member.email)?.get(taskStatus.todo)"
