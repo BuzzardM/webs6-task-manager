@@ -9,6 +9,8 @@ import {SprintService} from "../../../services/sprint/sprint.service";
 import {AddSprintComponent} from "./modals/add-sprint/add-sprint.component";
 import {ActivatedRoute} from "@angular/router";
 import {EditSprintDialogComponent} from "./modals/edit-sprint-dialog/edit-sprint-dialog.component";
+import {SetActiveDialogComponent} from "./modals/set-active-dialog/set-active-dialog.component";
+import {ProjectService} from "../../../services/project/project.service";
 
 @Component({
   selector: 'app-sprints',
@@ -17,15 +19,20 @@ import {EditSprintDialogComponent} from "./modals/edit-sprint-dialog/edit-sprint
 })
 export class SprintsComponent implements OnInit {
   projectId = this.route.snapshot.paramMap.get("projectId");
+  activeSprint: string | undefined;
   displayedColumns = ['title', 'description', 'start_date', 'end_date', 'actions'];
   dataSource = new MatTableDataSource<ISprint>();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  constructor(private route: ActivatedRoute, private authService: AuthService, private userService: UserService, private sprintService: SprintService, private dialog: MatDialog) {
+  constructor(private route: ActivatedRoute, private authService: AuthService, private userService: UserService, private sprintService: SprintService, private projecService: ProjectService, private dialog: MatDialog) {
     if (this.projectId != null) {
       this.sprintService.getProjectSprints(this.projectId).subscribe(s => {
         this.dataSource.data = s;
       });
+
+      this.projecService.getProject(this.projectId).subscribe(p => {
+        this.activeSprint = p.active_sprint;
+      })
     }
   }
 
@@ -65,6 +72,18 @@ export class SprintsComponent implements OnInit {
         sprint.end_date = result.value.end_date;
 
         this.sprintService.updateSprint(sprint);
+      }
+    })
+  }
+
+  setActiveSprintModal(sprintId: string) {
+    const dialogRef = this.dialog.open(SetActiveDialogComponent, {
+      width: '60%',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.projecService.setActiveSprint(sprintId, this.projectId!);
       }
     })
   }

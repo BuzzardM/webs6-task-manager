@@ -73,6 +73,7 @@ import { EditSprintDialogComponent } from './components/project/sprints/modals/e
 import { BoardComponent } from './components/project/sprints/board/board.component';
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import { AssignTaskDialogComponent } from './components/project/sprints/modals/assign-task-dialog/assign-task-dialog.component';
+import { SetActiveDialogComponent } from './components/project/sprints/modals/set-active-dialog/set-active-dialog.component';
 
 const materialModules = [
   CdkTreeModule,
@@ -136,6 +137,7 @@ const materialModules = [
     EditSprintDialogComponent,
     BoardComponent,
     AssignTaskDialogComponent,
+    SetActiveDialogComponent,
   ],
     imports: [
         BrowserModule,
