@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {AuthService} from "./services/auth.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -9,12 +10,13 @@ import {AuthService} from "./services/auth.service";
 export class AppComponent {
   title = 'scrumboard';
 
-  constructor(readonly authService: AuthService) {
+  constructor(readonly authService: AuthService, private router: Router) {
 
   }
 
   logout() {
-    // @ts-ignore
-    this.authService.logout().then(alert("LOGGED OUT!"));
+    this.authService.logout().then(() => {
+      this.router.navigateByUrl('/home')
+    });
   }
 }
