@@ -8,11 +8,11 @@ import {canActivate, redirectLoggedInTo, redirectUnauthorizedTo} from "@angular/
 import {ArchivedProjectsComponent} from "./components/projects/archived-projects/archived-projects.component";
 import {BacklogComponent} from "./components/project/backlog/backlog.component";
 import {SprintsComponent} from "./components/project/sprints/sprints.component";
-import {ArchiveTaskDialogComponent} from "./components/project/backlog/modals/archive-task/archive-task-dialog.component";
 import {
   ArchivedBacklogComponent
 } from "./components/project/archived-backlog/archived-backlog.component";
 import {BoardComponent} from "./components/project/sprints/board/board.component";
+import {BurndownComponent} from "./components/project/sprints/burndown/burndown.component";
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
@@ -60,7 +60,16 @@ const routes: Routes = [
               },
               {
                 path: ':sprintId',
-                component: BoardComponent
+                children: [
+                  {
+                    path: '',
+                    component: BoardComponent
+                  },
+                  {
+                    path: 'burndown',
+                    component: BurndownComponent
+                  }
+                ]
               }
             ]
           },
@@ -68,7 +77,7 @@ const routes: Routes = [
             path: 'archived-tasks',
             component: ArchivedBacklogComponent
           }
-          ]
+        ]
       }
     ],
     ...canActivate(redirectUnauthorizedToLogin)

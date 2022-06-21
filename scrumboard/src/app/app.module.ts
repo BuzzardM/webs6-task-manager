@@ -74,6 +74,7 @@ import { BoardComponent } from './components/project/sprints/board/board.compone
 import {DragDropModule} from "@angular/cdk/drag-drop";
 import { AssignTaskDialogComponent } from './components/project/sprints/modals/assign-task-dialog/assign-task-dialog.component';
 import { SetActiveDialogComponent } from './components/project/sprints/modals/set-active-dialog/set-active-dialog.component';
+import { BurndownComponent } from './components/project/sprints/burndown/burndown.component';
 
 const materialModules = [
   CdkTreeModule,
@@ -138,6 +139,7 @@ const materialModules = [
     BoardComponent,
     AssignTaskDialogComponent,
     SetActiveDialogComponent,
+    BurndownComponent,
   ],
     imports: [
         BrowserModule,

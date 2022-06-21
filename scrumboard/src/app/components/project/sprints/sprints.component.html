@@ -39,6 +39,10 @@
                   matTooltip="Edit sprint">
             <mat-icon>edit</mat-icon>
           </button>
+          <button mat-mini-fab color="edit" routerLink="/projects/{{ projectId }}/sprints/{{ row?.id }}/burndown" class="margin-right"
+                  matTooltip="Show burndown">
+            <mat-icon>timeline</mat-icon>
+          </button>
           <button *ngIf="row.id != activeSprint;else isActive" (click)="setActiveSprintModal(row)" mat-mini-fab color="edit"
                   matTooltip="Set active">
             <mat-icon>open_in_browser</mat-icon>
