@@ -8,6 +8,7 @@ import {ProjectService} from "../../../../services/project/project.service";
 import {TaskStatus} from "../../../../enums/taskStatus";
 import {moveItemInArray, transferArrayItem} from "@angular/cdk/drag-drop";
 import {TaskService} from "../../../../services/task/task.service";
+import {mergeMap, Subscription} from "rxjs";
 
 @Component({
   selector: 'app-board',
@@ -20,27 +21,35 @@ export class BoardComponent implements OnInit {
   taskStatus = TaskStatus;
   tasks: ITask[] | undefined;
   members: IProjectMember[] | undefined;
+  sub: Subscription | undefined;
 
   assignedTask = new Map<string, Map<TaskStatus, ITask[]>>();
 
   constructor(private projectService: ProjectService, private taskService: TaskService, private route: ActivatedRoute, private sprintService: SprintService, private dialog: MatDialog) {
 
     if (this.sprintId != null && this.projectId != null) {
-      this.tasks = [];
 
-      this.projectService.getProject(this.projectId).subscribe(p => {
-        this.members = p.member_info;
-        this.initAssignedTasks(this.members);
+      this.projectService.getProject(this.projectId).pipe(
+        mergeMap(p => this.sprintService.getSprintTasks(this.sprintId!)),
+      ).subscribe(tasks => {
+        console.log(tasks);
       });
 
-      this.sprintService.getSprintTasks(this.sprintId).subscribe(t => {
-        for (let task of t) {
-          if (task.assigned_to === undefined && !this.tasks?.includes(task)){
-            this.tasks?.push(task);
+      this.projectService.getProject(this.projectId).subscribe(p => {
+
+        this.members = p.member_info;
+
+        this.sub = this.sprintService.getSprintTasks(this.sprintId!).subscribe(t => {
+          this.tasks = [];
+          this.initAssignedTasks(p.member_info);
+          for (let task of t) {
+            if (task.assigned_to === undefined && !this.tasks?.includes(task)){
+              this.tasks?.push(task);
+            }
+            else if (task.assigned_to != undefined && !this.assignedTask.get(task.assigned_to)!.get(<TaskStatus>task.status)!.some(x => x.id == task.id))
+              this.assignedTask.get(task.assigned_to)!.get(<TaskStatus>task.status)!.push(task);
           }
-          else if (task.assigned_to != undefined && !this.assignedTask.get(task.assigned_to)!.get(<TaskStatus>task.status)!.some(x => x.id == task.id))
-            this.assignedTask.get(task.assigned_to)!.get(<TaskStatus>task.status)!.push(task);
-        }
+        });
       });
     }
   }
@@ -50,7 +59,6 @@ export class BoardComponent implements OnInit {
 
   initAssignedTasks(members: IProjectMember[]) {
     for (let member of members) {
-      if (this.assignedTask.has(member.email)) continue;
       let userTasks = this.assignedTask.set(member.email, new Map<TaskStatus, ITask[]>()).get(member.email)!;
 
       for (let status of Object.values(TaskStatus))

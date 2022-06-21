@@ -18,7 +18,7 @@ import {RestoreTaskDialogComponent} from "./modals/restore-task-dialog/restore-t
   styleUrls: ['./archived-backlog.component.sass']
 })
 export class ArchivedBacklogComponent implements OnInit {
-  projectId = this.route.snapshot.paramMap.get("uid");
+  projectId = this.route.snapshot.paramMap.get("projectId");
   taskStatus = TaskStatus;
   members: IProjectMember[] | undefined;
   displayedColumns = ['title', 'description', 'status', 'points', 'owner', 'actions'];
