@@ -6,7 +6,7 @@ export interface ITask {
   owner: string;
   project_id: string;
   assigned_sprint?: string;
-  assigned_to?: string;
+  assigned_to: string | null;
   points: number;
   created_at: Date;
   updated_at: Date;

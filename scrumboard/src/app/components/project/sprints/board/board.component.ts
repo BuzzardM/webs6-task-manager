@@ -80,11 +80,17 @@ export class BoardComponent implements OnInit {
   }
 
   assignTaskModal() {
-    const dialogRef = this.dialog.open(AssignTaskDialogComponent, {
-      width: '60%'
-    });
+    if (this.sprintId != null && this.projectId != null) {
+      let data = { projectId: this.projectId, sprintId: this.sprintId};
 
-    dialogRef.afterClosed().subscribe(result => {
-    })
+      const dialogRef = this.dialog.open(AssignTaskDialogComponent, {
+        width: '60%',
+        data: data
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        this.taskService.updateTasks(result, this.sprintId!);
+      })
+    }
   }
 }
