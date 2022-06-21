@@ -33,7 +33,7 @@
         <mat-cell *matCellDef="let row">
           <button routerLink="/projects/{{ projectId }}/sprints/{{ row?.id }}" class="margin-right" mat-mini-fab
                   color="edit" matTooltip="Open board">
-            <mat-icon>home</mat-icon>
+            <mat-icon>launch</mat-icon>
           </button>
           <button (click)="editSprintModal(row)" class="margin-right" mat-mini-fab color="edit"
                   matTooltip="Edit sprint">
@@ -45,7 +45,7 @@
           </button>
           <button *ngIf="row.id != activeSprint;else isActive" (click)="setActiveSprintModal(row)" mat-mini-fab color="edit"
                   matTooltip="Set active">
-            <mat-icon>open_in_browser</mat-icon>
+            <mat-icon>label</mat-icon>
           </button>
 
           <ng-template #isActive>

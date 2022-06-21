@@ -13,6 +13,7 @@ import {
 } from "./components/project/archived-backlog/archived-backlog.component";
 import {BoardComponent} from "./components/project/sprints/board/board.component";
 import {BurndownComponent} from "./components/project/sprints/burndown/burndown.component";
+import {MemberGuard} from "./guards/member.guard";
 
 const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['login']);
 const redirectLoggedInToHome = () => redirectLoggedInTo(['home']);
@@ -77,7 +78,8 @@ const routes: Routes = [
             path: 'archived-tasks',
             component: ArchivedBacklogComponent
           }
-        ]
+        ],
+        canActivate: [MemberGuard]
       }
     ],
     ...canActivate(redirectUnauthorizedToLogin)

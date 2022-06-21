@@ -6,6 +6,6 @@ export interface IProject {
   description: string;
   status: string;
   active_sprint: string;
-  members: [];
+  members: string[];
   member_info: [IProjectMember];
 }
