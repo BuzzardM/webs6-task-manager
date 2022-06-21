@@ -4,7 +4,7 @@
 
       <div class="board" cdkDropListGroup>
 
-        <div class="board-item" cdkDropList [cdkDropListData]="tasks" (cdkDropListDropped)="dropTask($event, null, null)">
+        <div class="backlog" cdkDropList [cdkDropListData]="tasks" (cdkDropListDropped)="dropTask($event, null, null)">
           <mat-card class="item" *ngFor="let task of tasks" cdkDrag>
             <h2>{{ task.title }}</h2>
             <p> {{ task.description }}</p>

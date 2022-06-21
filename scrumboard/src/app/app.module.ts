@@ -72,6 +72,7 @@ import { RestoreTaskDialogComponent } from './components/project/archived-backlo
 import { EditSprintDialogComponent } from './components/project/sprints/modals/edit-sprint-dialog/edit-sprint-dialog.component';
 import { BoardComponent } from './components/project/sprints/board/board.component';
 import {DragDropModule} from "@angular/cdk/drag-drop";
+import { AssignTaskDialogComponent } from './components/project/sprints/modals/assign-task-dialog/assign-task-dialog.component';
 
 const materialModules = [
   CdkTreeModule,
@@ -134,6 +135,7 @@ const materialModules = [
     RestoreTaskDialogComponent,
     EditSprintDialogComponent,
     BoardComponent,
+    AssignTaskDialogComponent,
   ],
     imports: [
         BrowserModule,

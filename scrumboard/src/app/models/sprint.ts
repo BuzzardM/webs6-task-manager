@@ -1,5 +1,3 @@
-import {ITask} from "./task";
-
 export interface ISprint {
   id?: number;
   title: string;
@@ -7,5 +5,4 @@ export interface ISprint {
   start_date: Date;
   end_date: Date;
   project_id: string;
-  tasks: ITask[];
 }
