@@ -5,18 +5,18 @@
       <mat-grid-tile colspan="1">
         <mat-form-field appearance="outline">
           <mat-label>Project name</mat-label>
-          <input matInput formControlName="title" required>
+          <input matInput formControlName="title" name="title" required>
         </mat-form-field>
 
         <mat-form-field appearance="outline">
           <mat-label>User name</mat-label>
-          <input matInput formControlName="username" required>
+          <input matInput formControlName="username" name="username" required>
         </mat-form-field>
       </mat-grid-tile>
       <mat-grid-tile colspan="1">
         <mat-form-field appearance="outline">
           <mat-label>Project description</mat-label>
-          <input matInput formControlName="description" required>
+          <input matInput formControlName="description" name="description" required>
         </mat-form-field>
       </mat-grid-tile>
     </mat-grid-list>
@@ -24,7 +24,7 @@
 </div>
 <div mat-dialog-actions>
   <button mat-raised-button (click)="onNoClick()" color="delete">Back</button>
-  <button mat-raised-button class="margin-left" [mat-dialog-close]="addProjectForm" [disabled]="!addProjectForm.valid"
+  <button mat-raised-button class="margin-left" name="add" [mat-dialog-close]="addProjectForm" [disabled]="!addProjectForm.valid"
           color="success">Add
   </button>
 </div>

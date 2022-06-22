@@ -6,13 +6,13 @@
     <form [formGroup]="form" (ngSubmit)="onSubmitForm()">
       <mat-card-content fxLayout="column" fxLayoutAlign="center">
         <mat-form-field class="form-field">
-          <input matInput formControlName="email" type="text">
+          <input matInput formControlName="email" name="email" type="text">
           <mat-placeholder class="placeholder">E-mail</mat-placeholder>
           <mat-error *ngIf="form.get('email')?.hasError('required')">E-mail is required</mat-error>
           <mat-error *ngIf="form.get('email')?.hasError('email')">E-mail is invalid</mat-error>
         </mat-form-field>
         <mat-form-field class="form-field">
-          <input matInput formControlName="password" type="password">
+          <input matInput formControlName="password" name="password" type="password">
           <mat-placeholder class="placeholder">Password</mat-placeholder>
           <mat-error *ngIf="form.get('password')?.hasError('required')">Password is required</mat-error>
         </mat-form-field>

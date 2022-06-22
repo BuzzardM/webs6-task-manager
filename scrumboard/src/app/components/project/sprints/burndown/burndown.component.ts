@@ -35,10 +35,6 @@ export class BurndownComponent implements OnInit {
     }
   }
 
-  ngAfterViewInit(): void {
-
-  }
-
   ngOnInit() {
   }
 

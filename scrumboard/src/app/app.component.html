@@ -10,7 +10,7 @@
         </a>
       </div>
       <div fxFlex fxLayoutAlign="flex-end center">
-        <button mat-icon-button aria-label="Toggle user menu" [matMenuTriggerFor]="userMenu">
+        <button mat-icon-button aria-label="Toggle user menu" [matMenuTriggerFor]="userMenu" id="userMenu">
           <mat-icon>person</mat-icon>
         </button>
       </div>
@@ -19,11 +19,11 @@
     <mat-menu #userMenu="matMenu">
       <div *ngIf="!authService.getUser()">
         <button mat-menu-item [routerLink]="'/register'">Register</button>
-        <button mat-menu-item [routerLink]="'/login'">Login</button>
+        <button mat-menu-item id="loginButton" [routerLink]="'/login'">Login</button>
       </div>
       <div *ngIf="authService.getUser()">
         <button mat-menu-item>Profile</button>
-        <button mat-menu-item (click)="logout()">Logout</button>
+        <button mat-menu-item id="logoutButton" (click)="logout()">Logout</button>
       </div>
     </mat-menu>
   </div>
