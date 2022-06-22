@@ -1,8 +1,8 @@
 <mat-drawer-container id="body-div">
   <mat-drawer mode="side" disableClose opened="true">
     <mat-nav-list *ngIf="projectId != null">
-      <a mat-list-item routerLink="/projects/{{ projectId }}/backlog">Backlog</a>
-      <a mat-list-item routerLink="/projects/{{ projectId }}/sprints">Sprints</a>
+      <a mat-list-item routerLink="/projects/{{ projectId }}/backlog" id="backlog-link">Backlog</a>
+      <a mat-list-item routerLink="/projects/{{ projectId }}/sprints" id="sprints-link">Sprints</a>
     </mat-nav-list>
   </mat-drawer>
   <mat-drawer-content>

@@ -2,7 +2,7 @@
   <div class="mat-elevation-z8 margin-left-right min-width-rem">
 
     <div class="margin-all">
-      <button mat-mini-fab class="top-button" (click)="addSprintModal()" color="primary" matTooltip="Add sprint">
+      <button mat-mini-fab class="top-button" (click)="addSprintModal()" color="primary" id="add-sprint-button" matTooltip="Add sprint">
         <mat-icon>add</mat-icon>
       </button>
     </div>
@@ -31,7 +31,7 @@
       <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef>Actions</mat-header-cell>
         <mat-cell *matCellDef="let row">
-          <button routerLink="/projects/{{ projectId }}/sprints/{{ row?.id }}" class="margin-right" mat-mini-fab
+          <button routerLink="/projects/{{ projectId }}/sprints/{{ row?.id }}" id="open-sprint-{{ row.title }}" class="margin-right" mat-mini-fab
                   color="edit" matTooltip="Open board">
             <mat-icon>launch</mat-icon>
           </button>
