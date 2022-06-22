@@ -75,6 +75,8 @@ import {DragDropModule} from "@angular/cdk/drag-drop";
 import { AssignTaskDialogComponent } from './components/project/sprints/modals/assign-task-dialog/assign-task-dialog.component';
 import { SetActiveDialogComponent } from './components/project/sprints/modals/set-active-dialog/set-active-dialog.component';
 import { BurndownComponent } from './components/project/sprints/burndown/burndown.component';
+import {NgxChartsModule} from "@swimlane/ngx-charts";
+import {DatePipe} from "@angular/common";
 
 const materialModules = [
   CdkTreeModule,
@@ -141,21 +143,22 @@ const materialModules = [
     SetActiveDialogComponent,
     BurndownComponent,
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        provideFirebaseApp(() => initializeApp(environment.firebase)),
-        provideAuth(() => getAuth()),
-        provideFirestore(() => getFirestore()),
-        BrowserAnimationsModule,
-        FlexLayoutModule,
-        FormsModule,
-        ReactiveFormsModule,
-        materialModules,
-        MatDialogModule,
-        DragDropModule
-    ],
-  providers: [],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
+    BrowserAnimationsModule,
+    FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule,
+    materialModules,
+    MatDialogModule,
+    DragDropModule,
+    NgxChartsModule,
+  ],
+  providers: [DatePipe],
   bootstrap: [AppComponent],
 })
 export class AppModule {

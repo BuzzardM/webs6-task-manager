@@ -1,1 +1,17 @@
-<p>burndown works!</p>
+<app-project-nav>
+  <div class="chart-container">
+    <p id="burndown-title">Burndown chart for {{ sprint?.title }}</p>
+    <ngx-charts-line-chart class="chart"
+      [legend]="true"
+      [customColors]="[{'name': 'Ideal', 'value': '#40e54e'}, {'name': 'Actual', 'value': '#e02629'}]"
+      [showXAxisLabel]="true"
+      [showYAxisLabel]="true"
+      [xAxis]="true"
+      [yAxis]="true"
+      [xAxisLabel]="'Date'"
+      [yAxisLabel]="'Amount of tasks'"
+      [timeline]="true"
+      [results]="data">
+    </ngx-charts-line-chart>
+  </div>
+</app-project-nav>
