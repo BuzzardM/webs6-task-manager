@@ -1,0 +1,96 @@
+#backlog
+  flex: 1 0 auto
+
+#backlog-header-div
+  display: flex
+  flex-direction: row
+  padding-bottom: 1rem
+  margin-top: 1rem
+  border-bottom: #212121 2px solid
+
+.backlog-header-col:first-child
+  margin-left: 1rem
+
+.backlog-header-col
+  flex: 0
+
+.backlog-header-col:nth-child(1)
+  flex: 1
+
+.backlog-header-col:last-child
+  margin-right: 0.5rem
+
+.custom-h1
+  font-size: 1.5rem
+  font-weight: bold
+  margin: 0
+
+#backlog-wrapper
+  border: #212121 2px solid
+  border-radius: 0.5rem
+
+#main-container
+  display: flex
+  flex-direction: row
+  width: 100%
+  padding: 0.5rem
+  box-sizing: border-box
+
+#left-container
+  min-width: 20%
+  max-width: 20%
+  flex: 20%
+  display: flex
+  flex-direction: column
+  padding-right: 1rem
+  box-sizing: border-box
+
+#right-container
+  min-width: 80%
+  max-width: 80%
+  flex: 80%
+
+#board-wrapper
+  display: flex
+  flex-direction: column
+  border: #212121 2px solid
+  border-radius: 0.5rem
+
+.board-row
+  display: flex
+  flex-direction: row
+  flex-wrap: nowrap
+
+.board-row:not(:first-child)
+  min-height: 10rem
+
+.board-row:not(:last-child)
+  border-bottom: #212121 2px solid
+
+.board-col
+  flex: 1 0 auto
+  width: 15rem
+
+.board-col:not(:last-child)
+  border-right: #212121 2px solid
+
+.board-col>h2
+  font-size: 1.5rem
+  font-weight: bold
+  margin-left: 0.5rem
+  margin-top: 1rem
+
+.board-col:first-child
+  flex: 2
+
+.board-item
+  border-radius: 1rem
+  margin: 0.5rem
+
+.custom-card
+  margin-left: 0.5rem
+  margin-top: 2rem
+  word-break: break-all
+
+.custom-card>h4
+  color: gray

@@ -1,0 +1,8 @@
+<h1 mat-dialog-title>Set active sprint</h1>
+<div mat-dialog-content>
+  <p>Are you sure you want to archive sprint: <span style="font-weight: 500;">{{ sprint }}</span>?</p>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onNoClick()" color="primary">Back</button>
+  <button mat-raised-button class="margin-left" [mat-dialog-close]="true" cdkFocusInitial color="edit">Yes, set active</button>
+</div>

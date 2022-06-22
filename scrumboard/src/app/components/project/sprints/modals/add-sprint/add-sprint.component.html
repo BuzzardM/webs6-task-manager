@@ -1,0 +1,42 @@
+<h1 mat-dialog-title>Add sprint</h1>
+<div mat-dialog-content class="dialog">
+  <form [formGroup]="addSprintForm">
+    <mat-grid-list cols="1" rowHeight="80px">
+      <mat-grid-tile colspan="1">
+        <mat-form-field appearance="outline">
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title" name="title" required>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1">
+        <mat-form-field appearance="outline">
+          <mat-label>Sprint description</mat-label>
+          <input matInput formControlName="description" name="description" required>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1">
+        <mat-form-field appearance="outline">
+          <mat-label>Start date</mat-label>
+          <input matInput [min]="today" [matDatepicker]="startDate" (dateChange)="changeMinDate($event)" id="startDate" placeholder="Choose start date" formControlName="start_date" required>
+          <mat-datepicker-toggle matSuffix [for]="$any(startDate)"></mat-datepicker-toggle>
+          <mat-datepicker #startDate></mat-datepicker>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1">
+        <mat-form-field appearance="outline">
+          <mat-label>End date</mat-label>
+          <input matInput [min]="minEnd" [matDatepicker]="endDate" placeholder="Choose end date" id="endDate" formControlName="end_date" required>
+          <mat-datepicker-toggle matSuffix [for]="$any(endDate)"></mat-datepicker-toggle>
+          <mat-datepicker #endDate></mat-datepicker>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onNoClick()" color="delete">Back</button>
+  <button mat-raised-button class="margin-left" name="add" [mat-dialog-close]="addSprintForm"
+          [disabled]="!addSprintForm.valid"
+          color="success">Add
+  </button>
+</div>

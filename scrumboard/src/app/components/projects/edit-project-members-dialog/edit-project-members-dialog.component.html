@@ -1,0 +1,42 @@
+<h1 mat-dialog-title>Edit project</h1>
+<div mat-dialog-content class="dialog">
+  <form [formGroup]="editProjectMembersForm">
+    <mat-grid-list cols="1" rowHeight="80px">
+      <mat-grid-tile colspan="1">
+        <mat-form-field appearance="outline">
+          <mat-label>Select member</mat-label>
+          <mat-select formControlName="member" required (selectionChange)="selectMember($event.value)">
+            <mat-option *ngFor="let member of projectMembers" value="{{ member.email }}">
+              {{ member.email }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="1" *ngIf="selectedMemberIndex != undefined">
+        <mat-form-field class="hidden-input">
+          <input matInput formControlName="email" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Name</mat-label>
+          <input matInput formControlName="name" required (change)="saveValue()">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Role</mat-label>
+          <mat-select formControlName="role" required (selectionChange)="saveValue()">
+            <mat-option *ngFor="let role of userRoles | keyvalue" value="{{ role.value }}">
+              {{ role.key }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onNoClick()" color="delete">Back</button>
+  <button mat-raised-button class="margin-left" [mat-dialog-close]="projectMembers" [disabled]="!editProjectMembersForm.valid"
+          color="success">Edit</button>
+</div>

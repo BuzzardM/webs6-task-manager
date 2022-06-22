@@ -1,0 +1,40 @@
+<h1 mat-dialog-title>Add user story</h1>
+<div mat-dialog-content class="dialog">
+  <form [formGroup]="addUserStoryForm">
+    <mat-grid-list cols="1" rowHeight="80px">
+      <mat-grid-tile colspan="1">
+        <mat-form-field appearance="outline">
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title" name="title" required>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1">
+        <mat-form-field appearance="outline">
+          <mat-label>Task description</mat-label>
+          <input matInput formControlName="description" name="description" required>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1">
+        <mat-form-field appearance="outline">
+          <mat-label>Points</mat-label>
+          <input matInput type="number" formControlName="points" name="points" required>
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1">
+        <mat-form-field appearance="outline">
+          <mat-label>Owner</mat-label>
+          <mat-select formControlName="owner" id="selectOwner" required>
+            <mat-option *ngFor="let member of members" [value]="member.email">{{member.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button (click)="onNoClick()" color="delete">Back</button>
+  <button mat-raised-button class="margin-left" name="add" [mat-dialog-close]="addUserStoryForm"
+          [disabled]="!addUserStoryForm.valid"
+          color="success">Add
+  </button>
+</div>
