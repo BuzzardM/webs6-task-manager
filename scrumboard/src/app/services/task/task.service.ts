@@ -32,6 +32,7 @@ export class TaskService {
   updateTask(task: ITask) {
     const taskId = task.id;
     const { id, ...rest } = task;
+    rest.updated_at = new Date();
 
     const taskRef = doc(this.db, `tasks/${taskId}`);
     return setDoc(taskRef, rest);
@@ -47,7 +48,7 @@ export class TaskService {
       const { id, ...rest } = task;
       const taskRef = doc(this.db, `tasks/${taskId}`);
 
-      console.log(rest);
+      rest.updated_at = new Date();
       batch.set(taskRef, rest);
     }
 
